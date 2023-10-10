@@ -15,8 +15,8 @@
         <nav class="menu">
             <div>
                 <div class="menu_principal">
-                    <div><a href="index.html">Accueil</a></div>
-                    <div><a href="cv.html">CV</a></div>
+                    <div><a href="index.php">Accueil</a></div>
+                    <div><a href="cv.php">CV</a></div>
                     <div><a href="projects.html">Projects</a></div>
                 </div>
             </div>
