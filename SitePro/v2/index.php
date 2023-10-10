@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <h1>test</h1>
+    <h1>Accueil</h1>
     <p class="c1">Ce paragraphe centré</p>
     <p class="c2">Ce paragraphe sera rouge</p>
     <p class="c1 c2">Ce paragraphe sera centré et rouge</p>
