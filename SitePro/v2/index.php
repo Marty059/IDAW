@@ -1,23 +1,29 @@
 <?php
-    require_once('template_header.php');
+    require_once("template_header.php");
+    require_once("template_menu.php");
+    $currentPageId = 'accueil';
+    if(isset($_GET['page'])) {
+        $currentPageId = $_GET['page'];
+    }
+?>
+<header class="bandeau_haut">
+    <h1 class="titre">Hector Durand</h1>
+</header>
 
-    require_once('template_menu.php');
-    renderMenuToHTML('index');
+<?php
+    renderMenuToHTML($currentPageId);
 ?>
 
+<section class="corps">
+    <?php
+    $pageToInclude = $currentPageId . ".php";
+    if(is_readable($pageToInclude))
+        require_once($pageToInclude);
+    else
+        require_once("error.php");
+    ?>
+</section>
 
-    <div class="conteneur">
-        <div class="bloc-texte">
-            <p>Bonjour</p>
-        </div>
-        <div class="bloc-image">
-            <img src="../Photo identité Martin Delsart - Copie.jpg" alt="Photo d'identité">
-        </div>
-    </div>
-
-    <h1>Accueil</h1>
-    <p class="c1">Ce paragraphe centré</p>
-    <p class="c2">Ce paragraphe sera rouge</p>
-    <p class="c1 c2">Ce paragraphe sera centré et rouge</p>
-</body>
-</html>
+<?php
+    require_once("footer.php");
+?>
