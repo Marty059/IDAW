@@ -1,6 +1,10 @@
 <?php
     require_once('template_header.php');
+
+    require_once('template_menu.php');
+    renderMenuToHTML('index');
 ?>
+
 
     <div class="conteneur">
         <div class="bloc-texte">

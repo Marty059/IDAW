@@ -13,15 +13,6 @@
     <body>
         <header>
             <h1 class="titre">Martin Delsart</h1>
-            <nav class="menu">
-                <div>
-                    <div class="menu_principal">
-                        <div class="onglet"><a href="index.php">Accueil</a></div>
-                        <div class="onglet"><a href="cv.php">CV</a></div>
-                        <div class="onglet"><a href="hobbies.php">Hobbies</a></div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+            
 
 
