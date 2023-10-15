@@ -1,5 +1,5 @@
 .menu_principal {
-    background-color: #006875;
+    background-color:#1593CB;
     display: flex;
     gap:75px;
     justify-content: center;
@@ -9,6 +9,10 @@
 }
 
 h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p{
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -36,11 +40,14 @@ a {
     display: flex;
 }
 
+.cv{
+    gap: 25px;
+}
+
 .bloc-texte {
-    flex: 3;
-    padding: 20px;
-    border:solid black; /* Ajouter une couleur de fond pour le texte si nécessaire */
+    flex: 5;
     border-radius: 10px;
+    text-align:justify;
 }
 
 .bloc-image {
@@ -50,6 +57,12 @@ a {
     justify-content: center;
 }
 
+.texte-parcours, .texte-experience{
+    flex: 1;
+    display:flex;
+    border:solid black;
+}
+
 /* Style optionnel pour rendre l'image responsive */
 .bloc-image img {
     width: 150px;
@@ -57,8 +70,8 @@ a {
     border-radius: 10px;
 }
 
-.onglet:hover, #CurrentPage{
-    background-color:#d1310d;
+.onglet:hover{
+    background-color: #0E4194;
     padding: 25px;
 }
 

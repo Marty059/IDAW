@@ -7,7 +7,9 @@
             // idPage titre
             'accueil' => array( 'Accueil' ),
             'cv' => array( 'Cv' ),
-            'hobbies' => array('Mes Hobbies')
+            'hobbies' => array('Mes Hobbies'),
+            'projets' => array('Mes Projets'),
+            'contact' => array('Contact')
         );
         echo '<nav class="menu">';
         echo '<div>';

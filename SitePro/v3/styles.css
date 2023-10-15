@@ -11,6 +11,10 @@
 h1{
     font-family: Arial, Helvetica, sans-serif;
 }
+    
+p{
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 .titre {
     font-family: Arial, Helvetica, sans-serif;
@@ -41,6 +45,7 @@ a {
     padding: 20px;
     border:solid black; /* Ajouter une couleur de fond pour le texte si nécessaire */
     border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .bloc-image {

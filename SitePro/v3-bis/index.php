@@ -10,14 +10,6 @@
     if(isset($_GET['lang'])) {
         $currentLanguage = $_GET['lang'];
     }
-?>
-
-
-<header class="bandeau_haut">
-    <h1 class="titre">Test</h1>
-</header>
-
-<?php
     
     renderMenuToHTML($currentPageId);
 ?>
