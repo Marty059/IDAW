@@ -43,7 +43,6 @@ ul{
 
 .onglet a {
     color: white;
-
     text-decoration: none;
 }
 
@@ -115,9 +114,6 @@ ul{
     flex: 1;
     display:flex;
     border:solid black;
-}
-
-.texte-parcours{
     background-color: #D9D9D9;
 }
 
