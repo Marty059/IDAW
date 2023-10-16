@@ -13,13 +13,6 @@
     <body>
         <header>
             <h1 class="titre">Martin Delsart</h1>
-            <div class="langues">
-                <?php echo"<a href=\"index.php?page={$currentPageId}&lang=fr\">Français</a><br>" ?>
-                <?php echo"<a href=\"index.php?page={$currentPageId}&lang=en\">English</a>" ?>
-            </div>
-            
-
-            
             
 
 

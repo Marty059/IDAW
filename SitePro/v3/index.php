@@ -1,23 +1,30 @@
 <?php
-    require_once('template_header.php');
-
-    require_once('template_menu.php');
-    renderMenuToHTML('index');
+    $currentPageId = 'accueil';
+    $currentLanguage = 'fr';
+    if(isset($_GET['page'])) {
+        $currentPageId = $_GET['page'];
+    }
+    if(isset($_GET['lang'])) {
+        $currentLanguage = $_GET['lang'];
+    }
+    
+    require_once("template_header.php");
+    require_once("template_menu.php");
+    renderMenuToHTML($currentPageId,$currentLanguage);
 ?>
+<section class="corps">
 
+<?php
+    if ($currentLanguage == "en"){
+        $pageToInclude = "en/" . $currentPageId . ".php";
+    } else {
+        $pageToInclude = "fr/" . $currentPageId . ".php";
+    }
+    if(is_readable($pageToInclude))
+        require_once($pageToInclude);
+    else
+        require_once("error.php");
 
-    <div class="conteneur">
-        <div class="bloc-texte">
-            <p>Bonjour</p>
-        </div>
-        <div class="bloc-image">
-            <img src="../Photo identité Martin Delsart - Copie.jpg" alt="Photo d'identité">
-        </div>
-    </div>
+    ?>
 
-    <h1>Accueil</h1>
-    <p class="c1">Ce paragraphe centré</p>
-    <p class="c2">Ce paragraphe sera rouge</p>
-    <p class="c1 c2">Ce paragraphe sera centré et rouge</p>
-</body>
-</html>
+</section>
