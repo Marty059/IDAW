@@ -1,4 +1,4 @@
-    <h1>Accueil</h1>
+    <h1>Home</h1>
     
     <div class="conteneur">
         <div class="bloc-texte">
