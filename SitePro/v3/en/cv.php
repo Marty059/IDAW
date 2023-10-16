@@ -5,7 +5,7 @@
         <div class="texte-parcours">
             <section class=formation>
                 <h2>Education</h2>
-                <h3>Formation d’ingénieur</h3>
+                <h3>Engineering training</h3>
                 <p>IMT Nord Europe, Douai (France)</p>
                 <p>Graduate school of multi-disciplinarity engineering that delivers a Master’s degree</p>
 
