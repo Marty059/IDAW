@@ -3,11 +3,11 @@
     <div class="conteneur">
         <div class="bloc-texte">
             <p>
-                Je suis Martin Delsart, étudiant en ingénierie à l'IMT Nord Europe de Douai depuis 2019. Avec une certification C1 en anglais et un Baccalauréat série S mention Très Bien, je suis polyglotte (français C2, anglais C1, allemand B1). Mes stages chez Alstom et Decathlon m'ont permis de contribuer à des projets concrets, allant de la création d'une base de données pour le TGV M à la supervision du déploiement d'une solution encaissement. Mes compétences numériques incluent une maîtrise intermédiaire en programmation C et la gestion de bases de données avec Access. Passionné de badminton, de musique (piano) et ancien membre d'une troupe de théâtre, je suis également impliqué dans des activités communautaires, ayant été scout et brancardier au pèlerinage de Lourdes. Mon parcours diversifié reflète mon engagement, ma polyvalence et ma capacité à exceller dans des environnements variés.
+            I'm Martin Delsart, an engineering student at IMT Nord Europe in Douai since 2019. With a C1 certification in English and a Baccalauréat série S mention Très Bien, I am a polyglot (French C2, English C1, German B1). My internships at Alstom and Decathlon enabled me to contribute to concrete projects, ranging from creating a database for the TGV M to supervising the deployment of a cashiering solution. My digital skills include intermediate proficiency in C programming and database management with Access. Passionate about badminton, music (piano) and a former member of a theater troupe, I'm also involved in community activities, having been a scout and stretcher-bearer at the Lourdes pilgrimage. My diverse background reflects my commitment, versatility and ability to excel in a variety of environments.
             </p>
             <br>
             <p>
-                Bienvenue sur mon site internet !
+                <strong>Welcome to my website!</strong>
             </p>
         </div>
         <div class="bloc-image">

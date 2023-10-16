@@ -13,14 +13,11 @@
     <body>
         <header>
             <h1 class="titre">Martin Delsart</h1>
-            <div class="image-container">
-                <?php echo"<a href=\"index.php?page={$currentPageId}&lang=fr\"" ?>
-                    <img src="../Flag_of_France.png" width="150px" alt="Fr">
-                </a>
-                <?php echo"<a href=\"index.php?page={$currentPageId}&lang=en\"" ?>
-                    <img src="../Flag_of_the_UK.png" width="150px" alt="En">
-                </a>
+            <div class="langues">
+                <?php echo"<a href=\"index.php?page={$currentPageId}&lang=fr\">Français</a><br>" ?>
+                <?php echo"<a href=\"index.php?page={$currentPageId}&lang=en\">English</a>" ?>
             </div>
+            
 
             
             

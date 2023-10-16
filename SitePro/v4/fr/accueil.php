@@ -7,7 +7,7 @@
             </p>
             <br>
             <p>
-                Bienvenue sur mon site internet !
+                <strong>Bienvenue sur mon site internet !</strong>
             </p>
         </div>
         <div class="bloc-image">

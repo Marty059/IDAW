@@ -8,7 +8,6 @@
                     'accueil' => 'Accueil',
                     'cv' => 'Cv' ,
                     'hobbies' => 'Mes Hobbies',
-                    'projets' => 'Mes Projets',
                     'contact' => 'Contact'
                 ),
         
@@ -16,7 +15,6 @@
                     'accueil' => 'Home',
                     'cv' => 'Resume',
                     'hobbies' => 'My Hobbies',
-                    'projets' => 'Mes Projects',
                     'contact' => 'Contact me'
                 )
             );
@@ -31,20 +29,11 @@
             echo "<div class=\"onglet\">"."<a" . $currentClass . ' href="index.php?page=' . $pageId . $langParam . '">' . $pageParameters . '</a></div>';
         }
         echo '</div>';
-
-        // Menu déroulant pour changer de langue
-        echo '<form class="lang-form" action="index.php" method="get" id="lang-form">';
-        echo '<input type="hidden" name="page" value="' . $currentPageId . '">';
-        echo '<select class="langSelect" name="lang" id="langSelect" onchange="document.getElementById(\'lang-form\').submit();">';
-        echo '<option value="fr"' . ($currentLanguage === 'fr' ? ' selected' : '') . '>Français</option>';
-        echo '<option value="en"' . ($currentLanguage === 'en' ? ' selected' : '') . '>English</option>';
-        echo '</select>';
-        echo '</form>';
-
         echo '</div>';
         echo '</nav>';
         echo '</header>';
 
-
     }
 ?>
+
+    
