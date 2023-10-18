@@ -4,6 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un utilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        caption {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+        }
+
+        .btn-edit {
+            background-color: #4CAF50;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
 

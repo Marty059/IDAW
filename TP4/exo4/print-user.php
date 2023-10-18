@@ -11,10 +11,10 @@ catch (PDOException $erreur) {
 $request = $pdo->prepare("select * from users");
 $request->execute();
 $result = $request->fetchAll(PDO::FETCH_OBJ);
-echo('<pre>');
+//echo('<pre>');
 // print_r ($result);
-print_r($_POST);
-echo('</pre>');
+// print_r($_POST);
+// echo('</pre>');
 
 if (count($result) > 0) {
     echo '<table border="1">';
@@ -24,11 +24,7 @@ if (count($result) > 0) {
         echo '<td>' . $user->id . '</td>';
         echo '<td>' . $user->name . '</td>';
         echo '<td>' . $user->email . '</td>';
-        /*echo '<td><label for="nom">Nom :</label><input type="text" id="nom" name="nom" value="'.' required>'
-
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required>*/
-        echo '<td><form method="POST"><input type="hidden" name="id" value="'. $user->id.'"><input type="submit" name="action" value="Modifier"><input  name="action"  type="submit" value="Supprimer"></form>';
+        echo '<td><form method="POST"><input type="hidden" name="id" value="'. $user->id.'"><input type="submit" name="action" class="btn-edit" value="Modifier"><input  name="action"  type="submit" class="btn-delete" value="Supprimer"></form>';
         echo '</tr>';
     }
     echo '</table>';
