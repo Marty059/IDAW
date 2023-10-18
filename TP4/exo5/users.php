@@ -16,6 +16,7 @@ switch($_SERVER["REQUEST_METHOD"]) {
     case 'GET':
         $result = get_users($pdo);
         setHeaders();
+        http_response_code(200);
         exit(json_encode($result));
 
     case 'POST':
