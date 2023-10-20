@@ -31,6 +31,15 @@
     .table tbody tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+
+    .btn-edit, .btn-delete {
+        padding: 6px 12px;
+        margin: 2px;
+    }
+
+    #addStudentForm {
+        margin-top: 20px;
+    }
     </style>
 </head>
 <body>
@@ -84,6 +93,39 @@
 </form>
 
 <script>
+
+let indice = 1;
+let editMode = false; // Variable pour suivre si le formulaire est en mode édition
+let editedRowId = null; // Variable pour stocker l'id de la ligne en mode édition
+
+function editRow(rowId) {
+    // Get the row by its id
+    let row = $("#" + rowId);
+
+    // Get the values from the row
+    let nom = row.find("td:eq(0)").text();
+    let prenom = row.find("td:eq(1)").text();
+    let dateNaissance = row.find("td:eq(2)").text();
+    let aimeLeCours = row.find("td:eq(3)").text();
+    let remarques = row.find("td:eq(4)").text();
+
+    // Set the values in the form
+    $("#inputNom").val(nom);
+    $("#inputPrenom").val(prenom);
+    $("#inputNaissance").val(dateNaissance);
+    $("#inputAime").prop("checked", aimeLeCours === "Oui");
+    $("#inputRemarques").val(remarques);
+
+    // Switch to edit mode
+    editMode = true;
+    editedRowId = rowId;
+}
+
+function deleteRow(rowId) {
+    // Get the row by its id and remove it
+    $("#" + rowId).remove();
+}
+
 function onFormSubmit(event) {
     // prevent the form to be sent to the server
     event.preventDefault();
@@ -93,16 +135,50 @@ function onFormSubmit(event) {
     let aimeLeCours = $("#inputAime").prop("checked") ? "Oui" : "Non";
     let remarques = $("#inputRemarques").val();
 
-    if (nom.trim() === "") {
-        // Afficher le message d'erreur
-        $("#nomErrorMessage").text("Ce champ est requis.");
-        return;
-    }
-    // Réinitialiser le message d'erreur s'il y avait une erreur précédente
-    $("#nomErrorMessage").text("");
+    if(editMode){
+        // Update the edited row
+        if (nom.trim() === "") {
+            // Afficher le message d'erreur
+            $("#nomErrorMessage").text("Ce champ est requis.");
+            return;
+        }else{
+            let editedRow = $("#" + editedRowId);
+            editedRow.find("td:eq(0)").text(nom);
+            editedRow.find("td:eq(1)").text(prenom);
+            editedRow.find("td:eq(2)").text(dateNaissance);
+            editedRow.find("td:eq(3)").text(aimeLeCours);
+            editedRow.find("td:eq(4)").text(remarques);
 
-    $("#studentsTableBody").append(`<tr><td>${nom}</td><td>${prenom}</td><td>${dateNaissance}</td><td>${aimeLeCours}</td><td>${remarques}</td><td></td></tr>`);
+            // Reset the form and switch back to normal mode
+            resetForm();
+        }
+    }else{
+        if (nom.trim() === "") {
+            // Afficher le message d'erreur
+            $("#nomErrorMessage").text("Ce champ est requis.");
+            return;
+        }
+        // Réinitialiser le message d'erreur s'il y avait une erreur précédente
+        $("#nomErrorMessage").text("");
+
+        $("#studentsTableBody").append(`<tr id="${indice}"><td>${nom}</td><td>${prenom}</td><td>${dateNaissance}</td><td>${aimeLeCours}</td><td>${remarques}</td><td></td><td><button onclick="editRow(${indice})">Edit</button></td><td><button onclick="deleteRow(${indice})">Delete</button></td></tr>`);
+        indice++;
+    }
 }
+
+function resetForm() {
+    // Reset the form
+    $("#inputNom").val("");
+    $("#inputPrenom").val("");
+    $("#inputNaissance").val("");
+    $("#inputAime").prop("checked", false);
+    $("#inputRemarques").val("");
+
+    // Switch back to normal mode
+    editMode = false;
+    editedRowId = null;
+}
+
 </script>
 </body>
 </html>
