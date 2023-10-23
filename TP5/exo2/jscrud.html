@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Include JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include Datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<body>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+                </tr>
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+
+    <form action="" method="post">
+        <!-- Champ caché pour l'ID -->
+        <input type="hidden" id="user_id" name="user_id" >
+        
+        <!-- Champ pour le nom -->
+        <label for="name">Nom:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+
+        <!-- Champ pour l'adresse e-mail -->
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="addUserBtn">Submit</button>
+    </form>
+<script src="ajax.js"></script>
+</body>
+</html>
