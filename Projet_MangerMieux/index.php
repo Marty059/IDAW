@@ -8,11 +8,14 @@
 
     renderMenuToHTML($currentPageId);
 
+?>
+
+<section class="corps">
+    <?php
     $pageToInclude = "frontend/" . $currentPageId . ".php";
     if(is_readable($pageToInclude))
         require_once($pageToInclude);
     else
         require_once("error.php");
     ?>
-?>
 
