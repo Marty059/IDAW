@@ -1,0 +1,32 @@
+.menu_principal {
+    margin-top: 20px;
+    background-color:#1ba539;
+    display: flex;
+    gap:75px;
+    justify-content: center;
+    width:100%;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.onglet a {
+    color: white;
+    text-decoration: none;
+}
+
+.onglet a:visited {
+    color: white;
+}
+
+.onglet:hover{
+    background-color:#1ba53976;;
+    padding: 25px;
+}
+
+.onglet{
+    padding: 25px;
+}
