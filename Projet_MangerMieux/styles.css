@@ -1,3 +1,4 @@
+/*CSS Menu Navigation*/
 .menu_principal {
     margin-top: 20px;
     background-color:#1ba539;
@@ -14,6 +15,8 @@ h1{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/*CSS Onglets Menu*/
 .onglet a {
     color: white;
     text-decoration: none;
@@ -36,3 +39,60 @@ h1{
 .onglet{
     padding: 25px;
 }
+
+
+/*CSS Inscription*/
+/*body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }*/
+
+.l_inscription {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 30px;
+    /* background-image: url('dropdown-arrow.png'); /* Ajoutez une image de flèche personnalisée */
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+  
