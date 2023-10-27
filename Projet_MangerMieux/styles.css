@@ -1,0 +1,23 @@
+.menu_principal {
+    margin-top: 20px;
+    background-color:#1593CB;
+    display: flex;
+    gap:75px;
+    justify-content: center;
+    width:100%;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.onglet a {
+    color: white;
+    text-decoration: none;
+}
+
+.onglet a:visited {
+    color: white;
+}
