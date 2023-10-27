@@ -3,7 +3,7 @@
         // un tableau qui definit la structure du site
         $mymenu = array(
             // idPage titre
-            'acceuil' => array( 'Accueil' ),
+            'accueil' => array( 'Accueil' ),
             'aliments' => array( 'Aliments' ),
             'historique' => array('Mon historique'),
             'compte' => array('Mon compte'),
@@ -13,7 +13,9 @@
         echo '<div>';
         echo '<div class="menu_principal">';
         foreach($mymenu as $pageId => $pageParameters) {
-            echo '<div class="onglet"><a href="'.$pageId.'.php">'. $pageParameters[0].'</a></div>';
+            //$currentClass = ($pageId === $currentPageId) ? ' id="currentPage"' : '';
+            //echo "<div class=\"onglet\">"."<a" . $currentClass . ' href="index.php?page=' . $pageId . '">' . $pageParameters . '</a></div>';
+            echo '<div class="onglet"><a href="index.php?page='.$pageId.'.php">'. $pageParameters[0].'</a></div>';
         }
         echo '</div>';
         echo '</div>';
