@@ -12,7 +12,7 @@
 
 <section class="corps">
     <?php
-        $pageToInclude = "frontend/" . $currentPageId ;
+        $pageToInclude = "frontend/" . $currentPageId . '.php';
         if(is_readable($pageToInclude))
             require_once($pageToInclude);
         else

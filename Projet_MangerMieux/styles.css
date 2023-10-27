@@ -23,7 +23,12 @@ h1{
 }
 
 .onglet:hover{
-    background-color:#1ba53976;;
+    background-color:#13512076;
+    padding: 25px;
+}
+
+.onglet.current {
+    background-color: #13512076;
     padding: 25px;
 }
 

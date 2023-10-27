@@ -13,14 +13,17 @@
         echo '<div>';
         echo '<div class="menu_principal">';
         foreach($mymenu as $pageId => $pageParameters) {
-            //$currentClass = ($pageId === $currentPageId) ? ' id="currentPage"' : '';
+            $currentClass = ($pageId === $currentPageId) ? 'current' : '';
+            //$currentClass = (trim($pageId) === trim($currentPageId)) ? 'current' : '';
             //echo "<div class=\"onglet\">"."<a" . $currentClass . ' href="index.php?page=' . $pageId . '">' . $pageParameters . '</a></div>';
-            echo '<div class="onglet"><a href="index.php?page='.$pageId.'.php">'. $pageParameters[0].'</a></div>';
+            //echo '<div class="onglet"><a href="index.php?page='.$pageId.'.php">'. $pageParameters[0].'</a></div>';
+            echo '<div class="onglet ' . $currentClass . '"><a href="index.php?page=' . $pageId . '">' . $pageParameters[0] . '</a></div>';
         }
         echo '</div>';
         echo '</div>';
         echo '</nav>';
-        echo '</header>';
+        echo '</header>';     
+
 
     }
 ?>
