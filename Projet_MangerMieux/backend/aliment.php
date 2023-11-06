@@ -1,6 +1,6 @@
 <?php
 require_once("init_pdo.php"); 
-require_once("init_data.php")
+//require_once("init_data.php");
 
 function get_last_id_food($pdo){
     $request = $pdo->prepare("SELECT MAX(ID_ALIMENT) FROM ALIMENTS");
@@ -24,13 +24,15 @@ function get_last_id_type($pdo){
 };
 function aliment_existe($data,$pdo){
     $nom_aliment = $data["product"]["generic_name"];
-    $request = $pdo->prepare("SELECT COUNT(ID_ALIMENT)
+    $request = $pdo->prepare("SELECT COUNT(ID_ALIMENT) AS count
     FROM ALIMENTS
-    WHERE NOM_ALIMENT :aliment");
-    $request->bindParam(":aliment",$nom_aliment, PDO::PARAM_STR);
+    WHERE NOM_ALIMENT = :aliment");
+    $request->bindParam(":aliment", $nom_aliment, PDO::PARAM_STR);
     $request->execute();
-    $resultat = $request->fetch(PDO::FETCH_OBJ);
-    echo json_encode($resultat);
+    $resultat = $request->fetch(PDO::FETCH_ASSOC);
+    $count = $resultat['count']; // Utilisez le nom de l'alias 'count' que vous avez défini dans la requête SQL
+    echo $count;
+    //return json_encode($resultat);
 }
 function ajouter_nutriments($data,$pdo){
     //ajoute les nutriments du dernier aliments
@@ -112,12 +114,21 @@ switch($_SERVER["REQUEST_METHOD"]){
 
     case 'POST':
         $data_array = json_decode(file_get_contents('php://input'), true);
-        $url = "https://world.openfoodfacts.org/api/v2/product/".$data_array["code"].".json";
-        $response = file_get_contents($url);
-        $data=json_decode($response,true);
-        //aliment_existe($data,$pdo);
-        ajouter_aliment($data,$pdo);  
-        ajouter_nutriments($data,$pdo);
+        if ($data_array !== null && isset($data_array["code"])) {
+            $url = "https://world.openfoodfacts.org/api/v2/product/".$data_array["code"].".json";
+            $response = file_get_contents($url);
+            $data=json_decode($response,true);
+            aliment_existe($data,$pdo);
+            //$resultat=$resultat['COUNT(ID_ALIMENT)'];
+            //echo $resultat;
+        } else {
+            echo "tableau vide";
+        }
+        
+        //$resultat=aliment_existe($data,$pdo);
+        //echo $resultat;
+        //ajouter_aliment($data,$pdo);  
+        //ajouter_nutriments($data,$pdo);
     
     case 'DELETE':
         $data_array = json_decode(file_get_contents('php://input'), true);
@@ -125,4 +136,5 @@ switch($_SERVER["REQUEST_METHOD"]){
         supprimer_nutriment_de($id_aliment,$pdo);
         supprimer_aliment($id_aliment,$pdo);
     }
+    //hello
 ?>
