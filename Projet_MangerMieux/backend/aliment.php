@@ -1,10 +1,7 @@
 <?php
 require_once("init_pdo.php"); 
-<<<<<<< HEAD
 //require_once("init_data.php");
-=======
 require_once("init_data.php");
->>>>>>> 49773684651c1b1fca730af27d1214bbeac42973
 
 function get_last_id_food($pdo){
     $request = $pdo->prepare("SELECT MAX(ID_ALIMENT) FROM ALIMENTS");
