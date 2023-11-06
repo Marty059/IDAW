@@ -130,8 +130,8 @@ create table USERS
    LOGIN                varchar(100),
    MOT_DE_PASSE         varchar(100),
    primary key (ID_USER)
-)
-type = InnoDB;
+);
+
 
 /*==============================================================*/
 /* Index : NOM                                                  */
