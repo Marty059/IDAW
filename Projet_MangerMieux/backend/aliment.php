@@ -25,17 +25,16 @@ function get_last_id_type($pdo){
     else{ $id = $resultat;}
     return $id;
 };
-function aliment_existe($data,$pdo){
-    $nom_aliment = $data["product"]["generic_name"];
+function aliment_existe($code,$pdo){
     $request = $pdo->prepare("SELECT COUNT(ID_ALIMENT) AS count
     FROM ALIMENTS
-    WHERE NOM_ALIMENT = :aliment");
-    $request->bindParam(":aliment", $nom_aliment, PDO::PARAM_STR);
+    WHERE CODE  = :code");
+    $request->bindParam(":code", $code, PDO::PARAM_STR);
     $request->execute();
     $resultat = $request->fetch(PDO::FETCH_ASSOC);
-    $count = $resultat['count']; // Utilisez le nom de l'alias 'count' que vous avez défini dans la requête SQL
-    echo $count;
-    //return json_encode($resultat);
+    $count = $resultat['count']; 
+    return $count;
+
 }
 function ajouter_nutriments($data,$pdo){
     //ajoute les nutriments du dernier aliments
@@ -64,38 +63,49 @@ function ajouter_nutriments($data,$pdo){
         }
    }
 }
-function ajouter_aliment($data,$pdo){
-    $kcal=$data["product"]["nutriments"]["energy-kcal"];
-    $id_aliment = get_last_id_food($pdo);
-    $id_aliment=$id_aliment+1;
-    $id_type = get_last_id_type($pdo);
-    $nomAliment = $data["product"]["generic_name"];
-    $request = $pdo->prepare("INSERT INTO ALIMENTS (ID_ALIMENT,ID_TYPE,NOM_ALIMENT,Kcal) VALUES (:idAlim,:idType,:nomAliment,:kcal)");
-    $request->bindParam(':idAlim', $id_aliment, PDO::PARAM_INT);
-    $request->bindParam(':idType', $id_type, PDO::PARAM_INT);
-    $request->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);
-    $request->bindParam(':kcal', $kcal, PDO::PARAM_STR);
-    $request->execute(); 
-}
 function ajouter_type($data,$pdo){ 
     //vérifie si le type existe et s'il existe pas créer un nouveau type 
     $type=$data["product"]["food_groups"];
     $type = substr($type,3);//nom du type
-    $id_type= get_last_id_type($pdo);
-    $id_type=$id_type+1;
     $request = $pdo->prepare("SELECT * FROM TYPE_ALIMENT WHERE NOM_TYPE = :type;");
     $request->bindParam(":type", $type, PDO::PARAM_STR);
     $request->execute();
     $resultat=$request->fetchall(PDO::FETCH_OBJ);
+    //si le type existe pas
     if(count($resultat) ==0){
+        //lui créer un id
+        $id_type= get_last_id_type($pdo);
+        $id_type=$id_type+1;
         $request = $pdo->prepare("INSERT INTO TYPE_ALIMENT (ID_TYPE,NOM_TYPE) VALUES (:idType,:type);");
         $request->bindParam(":type", $type, PDO::PARAM_STR);
         $request->bindParam(":idType", $id_type, PDO::PARAM_STR);
         $request->execute();
     }
+    //si le type existe
+    else{
+        $request = $pdo->prepare("SELECT ID_TYPE as id FROM TYPE_ALIMENT WHERE NOM_TYPE = :type;");
+        $request->bindParam(":type", $type, PDO::PARAM_STR);
+        $request->execute();
+        $id_type=$request->fetchColumn();
+
+    }
     //renvoie l'id du type 
     return $id_type;
     
+}
+function ajouter_aliment($code,$data,$pdo){
+    $kcal=$data["product"]["nutriments"]["energy-kcal"];
+    $id_aliment = get_last_id_food($pdo);
+    $id_aliment=$id_aliment+1;
+    $id_type = ajouter_type($data,$pdo);
+    $nomAliment = $data["product"]["generic_name"];
+    $request = $pdo->prepare("INSERT INTO ALIMENTS (ID_ALIMENT,ID_TYPE,NOM_ALIMENT,Kcal,CODE) VALUES (:idAlim,:idType,:nomAliment,:kcal,:code)");
+    $request->bindParam(':idAlim', $id_aliment, PDO::PARAM_INT);
+    $request->bindParam(':idType', $id_type, PDO::PARAM_INT);
+    $request->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);
+    $request->bindParam(':kcal', $kcal, PDO::PARAM_STR);
+    $request->bindParam(':code',$code , PDO::PARAM_STR);
+    $request->execute(); 
 }
 function supprimer_aliment($id,$pdo){
     $request= $pdo->prepare("DELETE FROM ALIMENTS WHERE ID_ALIMENT = :idAlim");
@@ -117,21 +127,22 @@ switch($_SERVER["REQUEST_METHOD"]){
 
     case 'POST':
         $data_array = json_decode(file_get_contents('php://input'), true);
+        $code = $data_array["code"];
         if ($data_array !== null && isset($data_array["code"])) {
             $url = "https://world.openfoodfacts.org/api/v2/product/".$data_array["code"].".json";
             $response = file_get_contents($url);
             $data=json_decode($response,true);
-            //aliment_existe($data,$pdo);
-            //$resultat=$resultat['COUNT(ID_ALIMENT)'];
-            //echo $resultat;
-        } else {
-            echo "tableau vide";
+            $count = aliment_existe($code,$pdo);
+            //s'il l'aliment existe pas
+            if($count==0){
+                ajouter_aliment($code,$data,$pdo);
+                ajouter_nutriments($data,$pdo);
+            }
+            else {
+                echo "l'aliment existe déjà";
+            }
         }
-        
-        //$resultat=aliment_existe($data,$pdo);
-        //echo $resultat;
-        //ajouter_aliment($data,$pdo);  
-        //ajouter_nutriments($data,$pdo);
+        exit();
     
     case 'DELETE':
         $data_array = json_decode(file_get_contents('php://input'), true);
@@ -139,6 +150,4 @@ switch($_SERVER["REQUEST_METHOD"]){
         supprimer_nutriment_de($id_aliment,$pdo);
         supprimer_aliment($id_aliment,$pdo);
     }
-    //hello
 ?>
-hello
