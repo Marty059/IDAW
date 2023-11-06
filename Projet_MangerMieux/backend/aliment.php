@@ -1,5 +1,6 @@
 <?php
 require_once("init_pdo.php"); 
+require_once("init_data.php")
 
 function get_last_id_food($pdo){
     $request = $pdo->prepare("SELECT MAX(ID_ALIMENT) FROM ALIMENTS");
@@ -59,18 +60,18 @@ function ajouter_nutriments($data,$pdo){
    }
 }
 function ajouter_aliment($data,$pdo){
-
+    $kcal=$data["product"]["nutriments"]["energy-kcal"];
     $id_aliment = get_last_id_food($pdo);
     $id_aliment=$id_aliment+1;
     $id_type = get_last_id_type($pdo);
     $nomAliment = $data["product"]["generic_name"];
-    $request = $pdo->prepare("INSERT INTO ALIMENTS (ID_ALIMENT,ID_TYPE,NOM_ALIMENT) VALUES (:idAlim,:idType,:nomAliment)");
+    $request = $pdo->prepare("INSERT INTO ALIMENTS (ID_ALIMENT,ID_TYPE,NOM_ALIMENT,Kcal) VALUES (:idAlim,:idType,:nomAliment,:kcal)");
     $request->bindParam(':idAlim', $id_aliment, PDO::PARAM_INT);
     $request->bindParam(':idType', $id_type, PDO::PARAM_INT);
     $request->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);
+    $request->bindParam(':kcal', $kcal, PDO::PARAM_STR);
     $request->execute(); 
 }
-
 function ajouter_type($data,$pdo){ 
     //vérifie si le type existe et s'il existe pas créer un nouveau type 
     $type=$data["product"]["food_groups"];
@@ -91,6 +92,17 @@ function ajouter_type($data,$pdo){
     return $id_type;
     
 }
+function supprimer_aliment($id,$pdo){
+    $request= $pdo->prepare("DELETE FROM ALIMENTS WHERE ID_ALIMENT = :idAlim");
+    $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
+    $request->execute();
+
+}
+function supprimer_nutriment_de($id,$pdo){
+    $request=$pdo->prepare("DELETE FROM COMPOSITION_ALIMENT WHERE ID_ALIMENT = :idAlim ");
+    $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
+    $request->execute();
+}
 switch($_SERVER["REQUEST_METHOD"]){
     case 'GET':   
         $request = $pdo->prepare("SELECT * FROM ALIMENTS");
@@ -103,8 +115,14 @@ switch($_SERVER["REQUEST_METHOD"]){
         $url = "https://world.openfoodfacts.org/api/v2/product/".$data_array["code"].".json";
         $response = file_get_contents($url);
         $data=json_decode($response,true);
-        aliment_existe($data,$pdo);
-        //ajouter_aliment($data,$pdo);  
-        //ajouter_nutriments($data,$pdo);
-        }
+        //aliment_existe($data,$pdo);
+        ajouter_aliment($data,$pdo);  
+        ajouter_nutriments($data,$pdo);
+    
+    case 'DELETE':
+        $data_array = json_decode(file_get_contents('php://input'), true);
+        $id_aliment = $data_array["id"];
+        supprimer_nutriment_de($id_aliment,$pdo);
+        supprimer_aliment($id_aliment,$pdo);
+    }
 ?>
