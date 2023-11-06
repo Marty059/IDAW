@@ -1,6 +1,6 @@
 <?php
 require_once("init_pdo.php"); 
-require_once("init_data.php")
+require_once("init_data.php");
 
 function get_last_id_food($pdo){
     $request = $pdo->prepare("SELECT MAX(ID_ALIMENT) FROM ALIMENTS");
@@ -126,3 +126,4 @@ switch($_SERVER["REQUEST_METHOD"]){
         supprimer_aliment($id_aliment,$pdo);
     }
 ?>
+hello
