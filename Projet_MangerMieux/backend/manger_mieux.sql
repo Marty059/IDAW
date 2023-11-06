@@ -1,179 +1,121 @@
-/*==============================================================*/
-/* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de cr�ation :  27/10/2023 10:36:56                      */
-/*==============================================================*/
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : lun. 06 nov. 2023 à 13:50
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de données : `manger_mieux`
+--
 
-/*==============================================================*/
-/* Table : ALIMENTS                                             */
-/*==============================================================*/
-create table ALIMENTS
-(
-   ID_ALIMENT           int not null,
-   ID_TYPE              int not null,
-   NOM_ALIMENT          varchar(100),
-   primary key (ID_ALIMENT)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Index : NOM_ALIMENT                                          */
-/*==============================================================*/
-create index NOM_ALIMENT on ALIMENTS
-(
-   NOM_ALIMENT
-);
+--
+-- Structure de la table `aliments`
+--
 
-/*==============================================================*/
-/* Table : COMPOSITION_ALIMENT                                  */
-/*==============================================================*/
-create table COMPOSITION_ALIMENT
-(
-   ID_ALIMENT           int not null,
-   ID_NUTRIMENT         int not null,
-   QUANTITE_POUR_100G   float,
-   primary key (ID_ALIMENT, ID_NUTRIMENT)
-);
+DROP TABLE IF EXISTS `aliments`;
+CREATE TABLE IF NOT EXISTS `aliments` (
+  `ID_ALIMENT` int NOT NULL,
+  `ID_TYPE` int NOT NULL,
+  `NOM_ALIMENT` varchar(100) DEFAULT NULL,
+  `Kcal` int NOT NULL,
+  PRIMARY KEY (`ID_ALIMENT`),
+  KEY `NOM_ALIMENT` (`NOM_ALIMENT`),
+  KEY `FK_ASSOCIATION_ALIMENT` (`ID_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
-/*==============================================================*/
-/* Table : COMPOSITION_PLAT                                     */
-/*==============================================================*/
-create table COMPOSITION_PLAT
-(
-   ID_PLAT              int not null,
-   ID_ALIMENT           int not null,
-   POURCENTAGE          float,
-   primary key (ID_PLAT, ID_ALIMENT)
-);
+--
+-- Déchargement des données de la table `aliments`
+--
 
-/*==============================================================*/
-/* Table : HISTORIQUE                                           */
-/*==============================================================*/
-create table HISTORIQUE
-(
-   ID_USER              int not null,
-   ID_PLAT              int not null,
-   DATE                 date,
-   primary key (ID_USER, ID_PLAT)
-);
+INSERT INTO `aliments` (`ID_ALIMENT`, `ID_TYPE`, `NOM_ALIMENT`, `Kcal`) VALUES
+(1, 4, 'Poulet', 106);
 
-/*==============================================================*/
-/* Table : NUTRIMENTS                                           */
-/*==============================================================*/
-create table NUTRIMENTS
-(
-   ID_NUTRIMENT         int not null,
-   NOM_NUTRIMENT        varchar(100),
-   primary key (ID_NUTRIMENT)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Index : NOM_NUTRIMENT                                        */
-/*==============================================================*/
-create index NOM_NUTRIMENT on NUTRIMENTS
-(
-   NOM_NUTRIMENT
-);
+--
+-- Structure de la table `composition_aliment`
+--
 
-/*==============================================================*/
-/* Table : PLATS                                                */
-/*==============================================================*/
-create table PLATS
-(
-   ID_PLAT              int not null,
-   NOM_PLAT             varchar(100),
-   primary key (ID_PLAT)
-);
+DROP TABLE IF EXISTS `composition_aliment`;
+CREATE TABLE IF NOT EXISTS `composition_aliment` (
+  `ID_ALIMENT` int NOT NULL,
+  `ID_NUTRIMENT` int NOT NULL,
+  `QUANTITE_POUR_100G` float DEFAULT NULL,
+  PRIMARY KEY (`ID_ALIMENT`,`ID_NUTRIMENT`),
+  KEY `FK_COMPOSITION_ALIMENT2` (`ID_NUTRIMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
-/*==============================================================*/
-/* Index : NOM_PLAT                                             */
-/*==============================================================*/
-create index NOM_PLAT on PLATS
-(
-   NOM_PLAT
-);
+--
+-- Déchargement des données de la table `composition_aliment`
+--
 
-/*==============================================================*/
-/* Table : PRATIQUE_SPORTIVE                                    */
-/*==============================================================*/
-create table PRATIQUE_SPORTIVE
-(
-   ID_PRATIQUE          int not null,
-   NIVEAU               varchar(100),
-   primary key (ID_PRATIQUE)
-);
+INSERT INTO `composition_aliment` (`ID_ALIMENT`, `ID_NUTRIMENT`, `QUANTITE_POUR_100G`) VALUES
+(1, 1, 23),
+(1, 3, 1.5);
 
-/*==============================================================*/
-/* Table : TYPE_ALIMENT                                         */
-/*==============================================================*/
-create table TYPE_ALIMENT
-(
-   ID_TYPE              int not null,
-   NOM_TYPE             varchar(100),
-   primary key (ID_TYPE)
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Table : USERS                                                */
-/*==============================================================*/
-create table USERS
-(
-   ID_USER              int not null,
-   ID_PRATIQUE          int not null,
-   NOM                  varchar(100),
-   PRENOM               varchar(100),
-   GENRE                varchar(100),
-   TAILLE               float,
-   POIDS                float,
-   AGE                  int,
-   LOGIN                varchar(100),
-   MOT_DE_PASSE         varchar(100),
-   primary key (ID_USER)
-);
+--
+-- Structure de la table `composition_plat`
+--
 
+DROP TABLE IF EXISTS `composition_plat`;
+CREATE TABLE IF NOT EXISTS `composition_plat` (
+  `ID_PLAT` int NOT NULL,
+  `ID_ALIMENT` int NOT NULL,
+  `POURCENTAGE` float DEFAULT NULL,
+  PRIMARY KEY (`ID_PLAT`,`ID_ALIMENT`),
+  KEY `FK_COMPOSITION_PLAT2` (`ID_ALIMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
-/*==============================================================*/
-/* Index : NOM                                                  */
-/*==============================================================*/
-create index NOM on USERS
-(
-   NOM
-);
+-- --------------------------------------------------------
 
-/*==============================================================*/
-/* Index : LOGIN                                                */
-/*==============================================================*/
-create index LOGIN on USERS
-(
-   LOGIN
-);
+--
+-- Structure de la table `historique`
+--
 
-alter table ALIMENTS add constraint FK_ASSOCIATION_ALIMENT foreign key (ID_TYPE)
-      references TYPE_ALIMENT (ID_TYPE) on delete restrict on update restrict;
+DROP TABLE IF EXISTS `historique`;
+CREATE TABLE IF NOT EXISTS `historique` (
+  `ID_USER` int NOT NULL,
+  `ID_PLAT` int NOT NULL,
+  `DATE` date DEFAULT NULL,
+  PRIMARY KEY (`ID_USER`,`ID_PLAT`),
+  KEY `FK_HISTORIQUE2` (`ID_PLAT`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
-alter table COMPOSITION_ALIMENT add constraint FK_COMPOSITION_ALIMENT foreign key (ID_ALIMENT)
-      references ALIMENTS (ID_ALIMENT) on delete restrict on update restrict;
+-- --------------------------------------------------------
 
-alter table COMPOSITION_ALIMENT add constraint FK_COMPOSITION_ALIMENT2 foreign key (ID_NUTRIMENT)
-      references NUTRIMENTS (ID_NUTRIMENT) on delete restrict on update restrict;
+--
+-- Structure de la table `nutriments`
+--
 
-alter table COMPOSITION_PLAT add constraint FK_COMPOSITION_PLAT foreign key (ID_PLAT)
-      references PLATS (ID_PLAT) on delete restrict on update restrict;
+DROP TABLE IF EXISTS `nutriments`;
+CREATE TABLE IF NOT EXISTS `nutriments` (
+  `ID_NUTRIMENT` int NOT NULL,
+  `NOM_NUTRIMENT` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_NUTRIMENT`),
+  KEY `NOM_NUTRIMENT` (`NOM_NUTRIMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
-alter table COMPOSITION_PLAT add constraint FK_COMPOSITION_PLAT2 foreign key (ID_ALIMENT)
-      references ALIMENTS (ID_ALIMENT) on delete restrict on update restrict;
+--
+-- Déchargement des données de la table `nutriments`
+--
 
-alter table HISTORIQUE add constraint FK_HISTORIQUE foreign key (ID_USER)
-      references USERS (ID_USER) on delete restrict on update restrict;
-
-alter table HISTORIQUE add constraint FK_HISTORIQUE2 foreign key (ID_PLAT)
-      references PLATS (ID_PLAT) on delete restrict on update restrict;
-
-alter table USERS add constraint FK_ASSOCIATION_SPORT foreign key (ID_PRATIQUE)
-      references PRATIQUE_SPORTIVE (ID_PRATIQUE) on delete restrict on update restrict;
-
---création nutriment--
 INSERT INTO `nutriments` (`ID_NUTRIMENT`, `NOM_NUTRIMENT`) VALUES
 (6, 'calcium'),
 (3, 'fat'),
@@ -185,16 +127,119 @@ INSERT INTO `nutriments` (`ID_NUTRIMENT`, `NOM_NUTRIMENT`) VALUES
 (8, 'vitamin-a'),
 (5, 'vitamin-c'),
 (9, 'vitamin-d');
---insertion type d'aliment--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `plats`
+--
+
+DROP TABLE IF EXISTS `plats`;
+CREATE TABLE IF NOT EXISTS `plats` (
+  `ID_PLAT` int NOT NULL,
+  `NOM_PLAT` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_PLAT`),
+  KEY `NOM_PLAT` (`NOM_PLAT`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pratique_sportive`
+--
+
+DROP TABLE IF EXISTS `pratique_sportive`;
+CREATE TABLE IF NOT EXISTS `pratique_sportive` (
+  `ID_PRATIQUE` int NOT NULL,
+  `NIVEAU` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_PRATIQUE`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `type_aliment`
+--
+
+DROP TABLE IF EXISTS `type_aliment`;
+CREATE TABLE IF NOT EXISTS `type_aliment` (
+  `ID_TYPE` int NOT NULL,
+  `NOM_TYPE` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+--
+-- Déchargement des données de la table `type_aliment`
+--
+
 INSERT INTO `type_aliment` (`ID_TYPE`, `NOM_TYPE`) VALUES
 (1, 'unsweetened-beverages'),
 (2, 'vegetables'),
 (3, 'cereals'),
 (4, 'poultry');
---insertion aliment--
-INSERT INTO `aliments` (`ID_ALIMENT`, `ID_TYPE`, `NOM_ALIMENT`, `Kcal`) VALUES
-(1, 4, 'Poulet', 106);
---composition des aliments--
-INSERT INTO `composition_aliment` (`ID_ALIMENT`, `ID_NUTRIMENT`, `QUANTITE_POUR_100G`) VALUES
-(1, 1, 23),
-(1, 3, 1.5);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID_USER` int NOT NULL,
+  `ID_PRATIQUE` int NOT NULL,
+  `NOM` varchar(100) DEFAULT NULL,
+  `PRENOM` varchar(100) DEFAULT NULL,
+  `GENRE` varchar(100) DEFAULT NULL,
+  `TAILLE` float DEFAULT NULL,
+  `POIDS` float DEFAULT NULL,
+  `AGE` int DEFAULT NULL,
+  `LOGIN` varchar(100) DEFAULT NULL,
+  `MOT_DE_PASSE` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID_USER`),
+  KEY `NOM` (`NOM`),
+  KEY `LOGIN` (`LOGIN`),
+  KEY `FK_ASSOCIATION_SPORT` (`ID_PRATIQUE`)
+) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `aliments`
+--
+ALTER TABLE `aliments`
+  ADD CONSTRAINT `FK_ASSOCIATION_ALIMENT` FOREIGN KEY (`ID_TYPE`) REFERENCES `type_aliment` (`ID_TYPE`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `composition_aliment`
+--
+ALTER TABLE `composition_aliment`
+  ADD CONSTRAINT `FK_COMPOSITION_ALIMENT` FOREIGN KEY (`ID_ALIMENT`) REFERENCES `aliments` (`ID_ALIMENT`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FK_COMPOSITION_ALIMENT2` FOREIGN KEY (`ID_NUTRIMENT`) REFERENCES `nutriments` (`ID_NUTRIMENT`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `composition_plat`
+--
+ALTER TABLE `composition_plat`
+  ADD CONSTRAINT `FK_COMPOSITION_PLAT` FOREIGN KEY (`ID_PLAT`) REFERENCES `plats` (`ID_PLAT`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FK_COMPOSITION_PLAT2` FOREIGN KEY (`ID_ALIMENT`) REFERENCES `aliments` (`ID_ALIMENT`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `historique`
+--
+ALTER TABLE `historique`
+  ADD CONSTRAINT `FK_HISTORIQUE` FOREIGN KEY (`ID_USER`) REFERENCES `users` (`ID_USER`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FK_HISTORIQUE2` FOREIGN KEY (`ID_PLAT`) REFERENCES `plats` (`ID_PLAT`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Contraintes pour la table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `FK_ASSOCIATION_SPORT` FOREIGN KEY (`ID_PRATIQUE`) REFERENCES `pratique_sportive` (`ID_PRATIQUE`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
