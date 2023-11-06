@@ -1,8 +1,8 @@
 <?php
-require_once("init_pdo.php"); 
+//require_once("init_pdo.php"); 
 
-//require_once("init_data.php");
 require_once("init_data.php");
+//require_once("init_data.php");
 
 
 function get_last_id_food($pdo){
@@ -121,7 +121,7 @@ switch($_SERVER["REQUEST_METHOD"]){
             $url = "https://world.openfoodfacts.org/api/v2/product/".$data_array["code"].".json";
             $response = file_get_contents($url);
             $data=json_decode($response,true);
-            aliment_existe($data,$pdo);
+            //aliment_existe($data,$pdo);
             //$resultat=$resultat['COUNT(ID_ALIMENT)'];
             //echo $resultat;
         } else {
