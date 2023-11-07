@@ -1,8 +1,7 @@
-<?php
-//require_once("init_pdo.php"); 
+<?php 
 
 require_once("init_data.php");
-//require_once("init_data.php");
+
 
 
 function get_last_id_food($pdo){
@@ -15,6 +14,16 @@ function get_last_id_food($pdo){
     else{ $id = $resultat;}
     return $id;
 };
+function get_last_id_plat($pdo){
+    $request = $pdo->prepare("SELECT MAX(ID_PLAT) FROM PLATS");
+    $request->execute();
+    $resultat= $request->fetchColumn();
+    if(!isset($resultat)){
+        $id = 0;
+    }
+    else{ $id = $resultat;}
+    return $id;
+}
 function get_last_id_type($pdo){
     $request = $pdo->prepare("SELECT MAX(ID_TYPE) FROM `type_aliment`");
     $request->execute();
@@ -96,16 +105,25 @@ function ajouter_type($data,$pdo){
 function ajouter_aliment($code,$data,$pdo){
     $kcal=$data["product"]["nutriments"]["energy-kcal"];
     $id_aliment = get_last_id_food($pdo);
+    $id_plat = get_last_id_plat($pdo);
+    $id_palt = $id_plat+1;
     $id_aliment=$id_aliment+1;
     $id_type = ajouter_type($data,$pdo);
-    $nomAliment = $data["product"]["generic_name"];
+    $nomAliment = $data["product"]["product_name"];
     $request = $pdo->prepare("INSERT INTO ALIMENTS (ID_ALIMENT,ID_TYPE,NOM_ALIMENT,Kcal,CODE) VALUES (:idAlim,:idType,:nomAliment,:kcal,:code)");
     $request->bindParam(':idAlim', $id_aliment, PDO::PARAM_INT);
     $request->bindParam(':idType', $id_type, PDO::PARAM_INT);
     $request->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);
     $request->bindParam(':kcal', $kcal, PDO::PARAM_STR);
     $request->bindParam(':code',$code , PDO::PARAM_STR);
-    $request->execute(); 
+    $request->execute();
+    //comme un aliment est un plat on ajoute l'aliment dans la table plat
+    $request = $pdo->prepare("INSERT INTO PLATS (ID_PLAT,NOM_PLAT) VALUES (:idPlat,:idNom)");
+    $request->bindParam(':idPlat', $id_Plat, PDO::PARAM_INT);
+    $request->bindParam(':idNom', $nomAliment,PDO::PARAM_INT);
+    $request->execute();
+    $request = $pdo->prepare("INSERT INTO PLATS (ID_PLAT,NOM_PLAT) VALUES (:idPlat,:idNom)");
+
 }
 function supprimer_aliment($id,$pdo){
     $request= $pdo->prepare("DELETE FROM ALIMENTS WHERE ID_ALIMENT = :idAlim");
