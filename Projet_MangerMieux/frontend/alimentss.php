@@ -24,13 +24,9 @@
                             defaultContent: '<input type="delete id="Supprimer" value="Supprimer">',
                             target: -1,*/
                             
-                            data: null,
-                                render: function (data, type, row) {
-                                    return '<form class="delete-form" onsubmit="onDelete(' + row.ID_ALIMENT + '); return false;">' +
-                                        '<div class="col-sm-2">' +
-                                            '<input type="submit" class="btn-delete" value="Supprimer">' +
-                                        '</div>' +
-                                    '</form>';
+                             data: null,
+                                render: function(data, type, row) {
+                                    return '<button class="deleteButton" data-id="' + row.ID_ALIMENT + '">Supprimer</button>';
                                 }
                                 /*defaultContent:
                                 '<form id="delete" action="" onsubmit="onDelete();">'
@@ -44,14 +40,14 @@
             });
 
              // Click event for delete button
-            // $('#myTable').on('click', '.deleteButton', function() {
-                // const alimentId = $(this).data('id');
-                // deleteAliment(alimentId);
-            // });
+            $('#myTable').on('click', '.deleteButton', function() {
+                const alimentId = $(this).data('id');
+                deleteAliment(alimentId);
+            });
         });
 
         // Function to perform DELETE operation
-        /*function onDelete(alimentId) {
+        function deleteAliment(alimentId) {
             $.ajax({
                 url: PREFIX + '/aliment.php',
                 type: 'DELETE',
@@ -67,7 +63,7 @@
                     console.error('Error deleting aliment:', error);
                 }
             });
-}*/
+}
 
     </script>
 
@@ -85,22 +81,5 @@
     </thead>
 
 </table>
-<script>
-    function onDelete(idAliment) {
-        $.ajax({
-            type: 'DELETE',
-            url: PREFIX + '/aliment.php', 
-            data: JSON.stringify({ id: idAliment }),
-            contentType: 'application/json',
-            success: function (response) {
-                // Mettez à jour votre tableau après la suppression
-                $('#myTable').DataTable().ajax.reload();
-            },
-            error: function (error) {
-                console.error('Erreur lors de la suppression', error);
-            }
-        });
-    }
-</script>
 </body>
 </html>
