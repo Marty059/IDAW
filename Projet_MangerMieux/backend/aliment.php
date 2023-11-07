@@ -87,13 +87,13 @@ function ajouter_type($data,$pdo){
         $id_type=$id_type+1;
         $request = $pdo->prepare("INSERT INTO TYPE_ALIMENT (ID_TYPE,NOM_TYPE) VALUES (:idType,:type);");
         $request->bindParam(":type", $type, PDO::PARAM_STR);
-        $request->bindParam(":idType", $id_type, PDO::PARAM_STR);
+        $request->bindParam(":idType", $id_type, PDO::PARAM_INT);
         $request->execute();
     }
     //si le type existe
     else{
         $request = $pdo->prepare("SELECT ID_TYPE as id FROM TYPE_ALIMENT WHERE NOM_TYPE = :type;");
-        $request->bindParam(":type", $type, PDO::PARAM_STR);
+        $request->bindParam(":type", $type, PDO::PARAM_INT);
         $request->execute();
         $id_type=$request->fetchColumn();
 
@@ -103,10 +103,11 @@ function ajouter_type($data,$pdo){
     
 }
 function ajouter_aliment($code,$data,$pdo){
+    $pourcentage=100;
     $kcal=$data["product"]["nutriments"]["energy-kcal"];
     $id_aliment = get_last_id_food($pdo);
     $id_plat = get_last_id_plat($pdo);
-    $id_palt = $id_plat+1;
+    $id_plat = $id_plat+1;
     $id_aliment=$id_aliment+1;
     $id_type = ajouter_type($data,$pdo);
     $nomAliment = $data["product"]["product_name"];
@@ -114,19 +115,33 @@ function ajouter_aliment($code,$data,$pdo){
     $request->bindParam(':idAlim', $id_aliment, PDO::PARAM_INT);
     $request->bindParam(':idType', $id_type, PDO::PARAM_INT);
     $request->bindParam(':nomAliment', $nomAliment, PDO::PARAM_STR);
-    $request->bindParam(':kcal', $kcal, PDO::PARAM_STR);
-    $request->bindParam(':code',$code , PDO::PARAM_STR);
+    $request->bindParam(':kcal', $kcal, PDO::PARAM_INT);
+    $request->bindParam(':code',$code , PDO::PARAM_INT);
     $request->execute();
     //comme un aliment est un plat on ajoute l'aliment dans la table plat
-    $request = $pdo->prepare("INSERT INTO PLATS (ID_PLAT,NOM_PLAT) VALUES (:idPlat,:idNom)");
-    $request->bindParam(':idPlat', $id_Plat, PDO::PARAM_INT);
-    $request->bindParam(':idNom', $nomAliment,PDO::PARAM_INT);
+    echo  $nomAliment;
+    $request = $pdo->prepare("INSERT INTO PLATS (ID_PLAT,NOM_PLAT) VALUES (:idPlat,:nomAliment)");
+    $request->bindParam(':idPlat', $id_plat, PDO::PARAM_INT);
+    $request->bindParam(':nomAliment', $nomAliment,PDO::PARAM_STR);
     $request->execute();
-    $request = $pdo->prepare("INSERT INTO PLATS (ID_PLAT,NOM_PLAT) VALUES (:idPlat,:idNom)");
-
+    //ajoute la composition du plat
+    $request = $pdo->prepare("INSERT INTO composition_plat (ID_PLAT,ID_ALIMENT,POURCENTAGE) VALUES (:idPlat,:idAlim,:pourcentage)");
+    $request->bindParam(':idPlat', $id_plat, PDO::PARAM_INT);
+    $request->bindParam(':idAlim', $id_aliment, PDO::PARAM_INT);
+    $request->bindParam(':pourcentage', $pourcentage, PDO::PARAM_STR);
+    $request->execute();
 }
 function supprimer_aliment($id,$pdo){
+    $request= $pdo->prepare("DELETE FROM composition_aliment WHERE ID_ALIMENT = :idAlim");
+    $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
+    $request->execute();
+    $request= $pdo->prepare("DELETE FROM composition_plat WHERE ID_ALIMENT = :idAlim");
+    $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
+    $request->execute();
     $request= $pdo->prepare("DELETE FROM ALIMENTS WHERE ID_ALIMENT = :idAlim");
+    $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
+    $request->execute();
+    $request= $pdo->prepare("DELETE FROM PLATS WHERE ID_PLAT = :idAlim");
     $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
     $request->execute();
 
@@ -137,10 +152,11 @@ function supprimer_nutriment_de($id,$pdo){
     $request->execute();
 }
 switch($_SERVER["REQUEST_METHOD"]){
-    case 'GET':   
-        $request = $pdo->prepare("SELECT * FROM ALIMENTS");
+    case 'GET':
+        $data_array = json_decode(file_get_contents('php://input'), true);   
+        $request = $pdo->prepare("SELECT * FROM ALIMENTS WHERE ID_ALIMENT = :id");
         $request->execute();
-        $resultat=$request->fetchall(PDO::FETCH_OBJ);
+        $resultat=$request->fetch(PDO::FETCH_OBJ);
         exit(json_encode($resultat));
 
     case 'POST':
