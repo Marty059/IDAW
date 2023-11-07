@@ -154,7 +154,9 @@ function supprimer_nutriment_de($id,$pdo){
 switch($_SERVER["REQUEST_METHOD"]){
     case 'GET':
         $data_array = json_decode(file_get_contents('php://input'), true);   
+        $id = $data_array["id"];
         $request = $pdo->prepare("SELECT * FROM ALIMENTS WHERE ID_ALIMENT = :id");
+        $request->bindParam(':id', $id, PDO::PARAM_STR);
         $request->execute();
         $resultat=$request->fetch(PDO::FETCH_OBJ);
         exit(json_encode($resultat));
