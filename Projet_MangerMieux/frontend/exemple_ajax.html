@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<form id="addStudentForm" action="" onsubmit="onGet();">
+    <div class="col-sm-2">
+        <input type="text" id="get_text">
+         <button type="submit" class="btn-get">Get</button>
+    </div>
+</form>
+
+<form id="delete" action="" onsubmit="onDelete();">
+    <div class="col-sm-2">
+        <input type="text" id="delete_text">
+        <input type="submit" class="btn-delete">Delete</input>
+    </div>
+</form>
+
+<div class="reponse-get"></div>
+<div class="reponse-delete"></div>
+</body>
+<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script>
+    let table = new DataTable('#myTable');
+    function onGet(){
+    event.preventDefault();
+    $(document).ready(function(){
+        $.ajax({
+            url: "user.php/2",
+            method: "GET",
+            dataType : "json",
+        })
+        .done(function(response){
+            console.log(response);
+            let data = JSON.stringify(response);
+            var nom = data.nom;
+            console.log(nom)
+            $("#myTable").append(nom);
+        })
+        .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));})     
+    })
+}
+
+function onDelete(){
+    event.preventDefault();
+        let formData = $('#delete_text').val();
+        console.log(formData);
+        $.ajax({
+            url: "user.php",
+            method: "Delete",
+            dataType : "json",
+            data:{
+                id : formData}
+        })
+        .done(function(response){
+            console.log(response);
+            let data = JSON.stringify(response);
+            $(".reponse-delete").append(data);
+        }) 
+        .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));})        
+    }
+
+</script>
+
+</html>
