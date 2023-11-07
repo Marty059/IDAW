@@ -2,8 +2,13 @@
 
 require_once("init_data.php");
 
-
-
+function is_in($pdo,$param,$table,$value){
+    $request=$pdo->prepare("SELECT COUNT(*) FROM $table WHERE $param = :value;");
+    $request->bindParam(':value', $value, PDO::PARAM_STR);
+    $request->execute();
+    $resultat= $request->fetchColumn();
+    return($resultat);
+}
 function get_last_id_food($pdo){
     $request = $pdo->prepare("SELECT MAX(ID_ALIMENT) FROM ALIMENTS");
     $request->execute();
@@ -151,15 +156,22 @@ function supprimer_nutriment_de($id,$pdo){
     $request->bindParam(':idAlim', $id, PDO::PARAM_INT);
     $request->execute();
 }
+$current_url = $_SERVER['REQUEST_URI'];
 switch($_SERVER["REQUEST_METHOD"]){
     case 'GET':
-        $data_array = json_decode(file_get_contents('php://input'), true);   
-        $id = $data_array["id"];
-        $request = $pdo->prepare("SELECT * FROM ALIMENTS WHERE ID_ALIMENT = :id");
-        $request->bindParam(':id', $id, PDO::PARAM_STR);
-        $request->execute();
-        $resultat=$request->fetch(PDO::FETCH_OBJ);
-        exit(json_encode($resultat));
+        $url_parts = parse_url($current_url);
+        $segments = explode('/', $url_parts['path']);
+        $id = end($segments);
+        $table = "aliments";
+        $param = 'ID_ALIMENT';
+        
+        if(is_in($pdo,$param,$table,$id)!=0){
+            $request = $pdo->prepare("SELECT * FROM ALIMENTS WHERE ID_ALIMENT = :id");
+            $request->bindParam(':id', $id, PDO::PARAM_STR);
+            $request->execute();
+            $resultat=$request->fetch(PDO::FETCH_OBJ);
+            exit(json_encode($resultat));}
+        else{exit(http_response_code(204));}
 
     case 'POST':
         $data_array = json_decode(file_get_contents('php://input'), true);
@@ -183,7 +195,13 @@ switch($_SERVER["REQUEST_METHOD"]){
     case 'DELETE':
         $data_array = json_decode(file_get_contents('php://input'), true);
         $id_aliment = $data_array["id"];
-        supprimer_nutriment_de($id_aliment,$pdo);
-        supprimer_aliment($id_aliment,$pdo);
+        $table ="ALIMENTS";
+        $param="ID_ALIMENT";
+        if(is_in($pdo,$param,$table,$id_aliment)!=0){
+            supprimer_nutriment_de($id_aliment,$pdo);
+            supprimer_aliment($id_aliment,$pdo);
+            exit();
+        }
+        else{exit(http_response_code(204));}
     }
 ?>
