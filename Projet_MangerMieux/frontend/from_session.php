@@ -27,30 +27,21 @@
                 event.preventDefault();
                 var login = $("#login").val();
                 var password = $("#password").val();
-                let prefixe = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend'
+                let prefixe = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend/'
                 $.ajax({
                     url: prefixe+'user.php', // Remplacez par l'URL de votre API
                     method: 'POST',
-                    data: {
-                        login: login,
-                        password: password
-                    },
+                    contentType: 'application/json', // Définissez le type de contenu comme JSON
+                    data: JSON.stringify({ login: login, password: password }),
                     dataType: 'json',
                     success: function(response) {
-                        if (response.success) {
-                            // Connexion réussie
                             $("#message").text("Connexion réussie!");
-
-                            // Redirigez l'utilisateur vers la page de son choix, par exemple :
-                            window.location.href = 'test_session.php';
-                        } else {
-                            // Échec de la connexion
-                            $("#message").text("Identifiants invalides. Veuillez réessayer.");
-                        }
+                            window.location.href = 'test_session.php'
                     },
                     error: function(error) {
+                        console.log("ici");
                         $("#message").text("Erreur lors de la connexion : " + JSON.stringify(error));
-                        window.location.href = 'test_session.php';
+                        
                     }
                 });
             });
