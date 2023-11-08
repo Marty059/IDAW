@@ -29,14 +29,20 @@
                 var password = $("#password").val();
                 let prefixe = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend/'
                 $.ajax({
-                    url: prefixe+'user.php', // Remplacez par l'URL de votre API
+                    url: prefixe+'open_session.php', // Remplacez par l'URL de votre API
                     method: 'POST',
                     contentType: 'application/json', // Définissez le type de contenu comme JSON
                     data: JSON.stringify({ login: login, password: password }),
                     dataType: 'json',
                     success: function(response) {
-                            $("#message").text("Connexion réussie!");
-                            window.location.href = 'test_session.php'
+                        
+                        if(response==1){
+                        $("#message").text("Connexion réussie!");
+                        window.location.href = 'test_session.php'
+                        }
+                        else{
+                            $("#message").text("pas possible de ce connecter : ");
+                        }
                     },
                     error: function(error) {
                         console.log("ici");
