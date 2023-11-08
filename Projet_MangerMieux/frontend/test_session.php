@@ -1,6 +1,7 @@
 <?php
 
     session_start();
+    $_SESSION=$_POST['password'];
     
 ?>
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
     <body>
         <h1>Titre principal</h1>
         <?php
-            echo $_SESSION['login'];
+            echo $_SESSION['password'];
         ?>
         <p>Un paragraphe</p>
     </body>
