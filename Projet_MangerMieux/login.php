@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Formulaire de Connexion</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Inclure jQuery -->
-</head>
+<?php
+    require_once("template_header.php");
+?>
+
 <body>
     <form id="loginForm">
         <label for="login">Login :</label>
@@ -28,3 +26,5 @@
         else
             require_once("error.php");
     ?>
+
+    <a href="inscription.php"><button>Inscription</button></a>
