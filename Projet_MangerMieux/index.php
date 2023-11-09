@@ -33,11 +33,9 @@
             require_once($pageToInclude);
         else
             require_once("error.php");
-    ?>
-
-    <div id="deconnection">
-		<a href="index.php?disconnect">Logout</a>
-	</div>
-
-    
+    ?>    
 </section>
+
+<div id="deconnection">
+		<a class="logout-link" href="index.php?disconnect">Logout</a>
+</div>
