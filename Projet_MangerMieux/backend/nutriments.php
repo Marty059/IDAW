@@ -6,7 +6,7 @@ function nom_nutriment($pdo,$id){
 
 switch($_SERVER["REQUEST_METHOD"]){
     //donne nutriments d'un plat donné
-    case 'GET': 
+    case 'POST': 
         //récupère les nutriments  
         $data_array = json_decode(file_get_contents('php://input'), true);
         $request = $pdo->prepare("SELECT * FROM composition_aliment WHERE ID_ALIMENT = :id ");

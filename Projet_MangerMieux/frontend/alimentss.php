@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
         
-        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
             $('#myTable').DataTable({
@@ -76,11 +76,12 @@
 
     function showNutriments(idAliment) {
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: PREFIX + '/nutriments.php',
         data: { id: idAliment },
         dataType: 'json',
         success: function (nutriments) {
+             console.log("hello");
             // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
             alert(JSON.stringify(nutriments));
         },
