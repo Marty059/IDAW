@@ -81,8 +81,13 @@
         data: { id: idAliment },
         dataType: 'json',
         success: function (nutriments) {
+
              console.log("hello");
+
+ 
+
             // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
+            
             alert(JSON.stringify(nutriments));
         },
         error: function (error) {
