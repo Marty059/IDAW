@@ -20,51 +20,26 @@
                         { data: 'NOM_ALIMENT' },
                         { data: 'Kcal'},
                         {
-                            /*data:"modifier",
-                            defaultContent: '<input type="delete id="Supprimer" value="Supprimer">',
-                            target: -1,*/
-                            
-                             data: null,
-                                render: function(data, type, row) {
-                                    return '<button class="deleteButton" data-id="' + row.ID_ALIMENT + '">Supprimer</button>';
+
+                            data: null,
+                                render: function (data, type, row) {
+                                    return '<form class="delete-form" onsubmit="onDelete(' + row.ID_ALIMENT + '); return false;">' +
+                                        '<div class="col-sm-2">' +
+                                            '<input type="submit" class="btn-delete" value="Supprimer">' +
+                                        '</div>' +
+                                    '</form>';
                                 }
-                                /*defaultContent:
-                                '<form id="delete" action="" onsubmit="onDelete();">'
-                                    '<div class="col-sm-2">'
-                                        '<input type="submit" class="btn-delete">Delete</input>'
-                                    '</div>'
-                                '</form>',
-                                target: -1,*/
+                        },
+                        // Nouvelle colonne pour afficher les nutriments
+                        {
+                            data: null,
+                            render: function (data, type, row) {
+                                return '<button onclick="showNutriments(' + row.ID_ALIMENT + ')">Voir Nutriments</button>';
+                            }
                         }
                     ]
             });
-
-             // Click event for delete button
-            $('#myTable').on('click', '.deleteButton', function() {
-                const alimentId = $(this).data('id');
-                deleteAliment(alimentId);
-            });
         });
-
-        // Function to perform DELETE operation
-        function deleteAliment(alimentId) {
-            $.ajax({
-                url: PREFIX + '/aliment.php',
-                type: 'DELETE',
-                dataType: 'json',
-                data: {
-                    id: alimentId
-                },
-                success: function(response) {
-                    // Handle success, e.g., refresh the DataTable
-                    $('#myTable').DataTable().ajax.reload();
-                },
-                error: function(error) {
-                    console.error('Error deleting aliment:', error);
-                }
-            });
-}
-
     </script>
 
 </head>
@@ -77,9 +52,43 @@
             <th>nom aliment</th>
             <th>calories</th>
             <th>Bouton</th>
+            <th>Bouton bis</th>
         </tr>
     </thead>
 
 </table>
+<script>
+    function onDelete(idAliment) {
+        $.ajax({
+            type: 'DELETE',
+            url: PREFIX + '/aliment.php', 
+            data: JSON.stringify({ id: idAliment }),
+            contentType: 'application/json',
+            success: function (response) {
+                // Mettez à jour votre tableau après la suppression
+                $('#myTable').DataTable().ajax.reload();
+            },
+            error: function (error) {
+                console.error('Erreur lors de la suppression', error);
+            }
+        });
+    }
+
+    function showNutriments(idAliment) {
+    $.ajax({
+        type: 'GET',
+        url: PREFIX + '/nutriments.php',
+        data: { id: idAliment },
+        dataType: 'json',
+        success: function (nutriments) {
+            // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
+            alert(JSON.stringify(nutriments));
+        },
+        error: function (error) {
+            console.error('Erreur lors de la récupération des nutriments', error);
+        }
+    });
+}
+</script>
 </body>
 </html>

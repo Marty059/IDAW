@@ -27,7 +27,7 @@
                 event.preventDefault();
                 var login = $("#login").val();
                 var password = $("#password").val();
-                let prefixe = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend/'
+                let prefixe = 'http://localhost/IDAW/Projet_MangerMieux/backend/'
                 $.ajax({
                     url: prefixe+'open_session.php', // Remplacez par l'URL de votre API
                     method: 'POST',

@@ -20,10 +20,7 @@
                         { data: 'NOM_ALIMENT' },
                         { data: 'Kcal'},
                         {
-                            /*data:"modifier",
-                            defaultContent: '<input type="delete id="Supprimer" value="Supprimer">',
-                            target: -1,*/
-                            
+
                             data: null,
                                 render: function (data, type, row) {
                                     return '<form class="delete-form" onsubmit="onDelete(' + row.ID_ALIMENT + '); return false;">' +
@@ -32,43 +29,10 @@
                                         '</div>' +
                                     '</form>';
                                 }
-                                /*defaultContent:
-                                '<form id="delete" action="" onsubmit="onDelete();">'
-                                    '<div class="col-sm-2">'
-                                        '<input type="submit" class="btn-delete">Delete</input>'
-                                    '</div>'
-                                '</form>',
-                                target: -1,*/
                         }
                     ]
             });
-
-             // Click event for delete button
-            // $('#myTable').on('click', '.deleteButton', function() {
-                // const alimentId = $(this).data('id');
-                // deleteAliment(alimentId);
-            // });
         });
-
-        // Function to perform DELETE operation
-        /*function onDelete(alimentId) {
-            $.ajax({
-                url: PREFIX + '/aliment.php',
-                type: 'DELETE',
-                dataType: 'json',
-                data: {
-                    id: alimentId
-                },
-                success: function(response) {
-                    // Handle success, e.g., refresh the DataTable
-                    $('#myTable').DataTable().ajax.reload();
-                },
-                error: function(error) {
-                    console.error('Error deleting aliment:', error);
-                }
-            });
-}*/
-
     </script>
 
 </head>
