@@ -38,7 +38,7 @@
                         
                         if(response==1){
                         $("#message").text("Connexion réussie!");
-                        window.location.href = 'test_session.php'
+                        window.location.href = './index.php'
                         }
                         else{
                             $("#message").text("pas possible de ce connecter : ");

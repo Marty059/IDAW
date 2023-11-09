@@ -1,4 +1,20 @@
 <?php
+    session_start(); 
+    // Vérifie si l'utilisateur est connecté
+    if(isset($_GET['disconnect'])) {
+        session_unset();
+        session_destroy();
+        unset($_GET['disconnect']);
+        header("Location: login.php");
+        exit();
+    }
+
+    if (!isset($_SESSION['login'])) {
+        // Redirigez l'utilisateur vers la page de connexion s'il n'est pas connecté
+        header("Location: login.php");
+        exit();
+    }
+
     $currentPageId = 'accueil';
     if(isset($_GET['page'])) {
         $currentPageId = $_GET['page'];
@@ -18,6 +34,10 @@
         else
             require_once("error.php");
     ?>
+
+    <div id="deconnection">
+		<a href="index.php?disconnect">Logout</a>
+	</div>
 
     
 </section>
