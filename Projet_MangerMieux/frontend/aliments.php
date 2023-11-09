@@ -78,25 +78,10 @@
         });
     }
     function showNutriments(idAliment) {
-    $.ajax({
-        type: 'POST',
-        url: PREFIX + '/nutriments.php',
-        data: JSON.stringify({ id: idAliment }),
-        dataType: 'json',
-        success: function (nutriments) {
-
-             console.log("hello");
-
- 
 
             // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
             
-            alert(JSON.stringify(nutriments));
-        },
-        error: function (error) {
-            console.error('Erreur lors de la récupération des nutriments', error);
-        }
-    });
+            window.location.href = "http://localhost/Projet_martin/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
 }
 </script>
 </body>
