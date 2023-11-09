@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
         
-        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
             $('#myTable').DataTable({
@@ -29,6 +29,17 @@
                                         '</div>' +
                                     '</form>';
                                 }
+                        },
+                        // Nouvelle colonne pour afficher les nutriments
+                        {
+                            data: null,
+                            render: function (data, type, row) {
+                                return '<form class="nutriment-form" onsubmit="showNutriments(' + row.ID_ALIMENT + '); return false;">' +
+                                        '<div class="col-sm-2">' +
+                                            '<input type="submit" class="btn-nutriment" value="nutriment">' +
+                                        '</div>' +
+                                    '</form>';
+                            }
                         }
                     ]
             });
@@ -45,6 +56,7 @@
             <th>nom aliment</th>
             <th>calories</th>
             <th>Bouton</th>
+            <th>showNutriments</th>
         </tr>
     </thead>
 
@@ -65,6 +77,27 @@
             }
         });
     }
+    function showNutriments(idAliment) {
+    $.ajax({
+        type: 'POST',
+        url: PREFIX + '/nutriments.php',
+        data: JSON.stringify({ id: idAliment }),
+        dataType: 'json',
+        success: function (nutriments) {
+
+             console.log("hello");
+
+ 
+
+            // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
+            
+            alert(JSON.stringify(nutriments));
+        },
+        error: function (error) {
+            console.error('Erreur lors de la récupération des nutriments', error);
+        }
+    });
+}
 </script>
 </body>
 </html>
