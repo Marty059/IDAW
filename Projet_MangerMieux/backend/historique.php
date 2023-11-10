@@ -26,7 +26,8 @@ switch($_SERVER["REQUEST_METHOD"]){
         $id_user = id_user($pdo,$data_array);
         $id_plat = $data_array["id_plat"];
         $id_historique = get_last_id_histo($pdo)+1;
-        $date = date('Y-m-d ');;
+        echo  $id_historique ;
+        $date = date('Y-m-d H:i:s');
         $quantite = $data_array["quantite"];
         if ($data_array !== null && isset($data_array["id_plat"])){
             $request = $pdo->prepare("INSERT INTO HISTORIQUE (ID_HISTORIQUE,ID_USER,ID_PLAT,DATE,Quantité) VALUES (:id_histo,:idUser,:idPlat,:date,:quantite)");
@@ -44,6 +45,8 @@ switch($_SERVER["REQUEST_METHOD"]){
         }
     case 'DELETE':
         $data_array = json_decode(file_get_contents('php://input'), true);
+
+
         $id_historique = $data_array["id_historique"];
         //récupère id user
         $request = $pdo->prepare("DELETE FROM HISTORIQUE WHERE id_historique = :id_historique;");

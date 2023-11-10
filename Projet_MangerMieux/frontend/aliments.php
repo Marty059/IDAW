@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
         
-        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
             $('#myTable').DataTable({
@@ -40,6 +40,16 @@
                                         '</div>' +
                                     '</form>';
                             }
+                        },
+                        {
+                            data: null,
+                            render: function (data, type, row) {
+                                return '<form class="nutriment-form" onsubmit="ajout_historique(' + row.ID_ALIMENT + '); return false;">' +
+                                        '<div class="col-sm-2">' + '<input type="text" id="add_histo">'+
+                                            '<input type="submit" class="btn-nutriment" value="add">' +
+                                        '</div>' +
+                                    '</form>';
+                            }
                         }
                     ]
             });
@@ -57,11 +67,14 @@
             <th>calories</th>
             <th>Bouton</th>
             <th>showNutriments</th>
+            <th>ajouter à historique</th>
         </tr>
     </thead>
 
 </table>
 <script>
+    var login = '<?php echo isset($_SESSION['login']) ? $_SESSION['login'] : ''; ?>';
+    var password = '<?php echo isset($_SESSION['password']) ? $_SESSION['password'] : ''; ?>';
     function onDelete(idAliment) {
         $.ajax({
             type: 'DELETE',
@@ -83,6 +96,22 @@
             
             window.location.href = "http://localhost/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
 }
+    function ajout_historique(idAliment){
+        event.preventDefault();
+        let quantite = $('#add_histo').val();
+        $.ajax({
+            type: 'POST',
+            url: PREFIX + '/historique.php', 
+            data: JSON.stringify({ id_plat: idAliment,quantite : quantite, login : login, password: password  }),
+            contentType: 'application/json',
+            success: function (response) {
+                // Mettez à jour votre tableau après la suppression
+                $('#myTable').DataTable().ajax.reload();
+            },
+            error: function (error) {
+                console.error('Erreur lors de la suppression', error);}
+        })
+    }
 </script>
 </body>
 </html>
