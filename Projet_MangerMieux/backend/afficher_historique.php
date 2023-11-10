@@ -5,8 +5,8 @@ function id_user($pdo, $data) {
     $login = $data["login"];
     $password = $data["password"];
     $request = $pdo->prepare("SELECT ID_USER FROM USERS WHERE LOGIN = :login AND MOT_DE_PASSE = :password");
-    $request->bindParam(':login', $login, PDO::PARAM_INT);
-    $request->bindParam(':password', $password, PDO::PARAM_INT);
+    $request->bindParam(':login', $login, PDO::PARAM_STR);
+    $request->bindParam(':password', $password, PDO::PARAM_STR);
     $request->execute();
     $id = $request->fetchColumn();
     return $id;

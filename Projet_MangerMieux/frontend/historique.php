@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
         
-        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             // Récupérer les données de session PHP
             var login = '<?php echo isset($_SESSION['login']) ? $_SESSION['login'] : ''; ?>';
