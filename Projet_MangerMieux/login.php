@@ -18,9 +18,15 @@
         <br>
 
         <input class="submit_inscription" type="submit" value="Se Connecter">
+
+
+
     </form>
 
     <div id="message"></div>
+
+    <label class="l_inscription" for="creation">Pas de compte ?</label>
+        <a href="inscription.php"><button class="pas_de_compte">Inscription</button></a>
 
 <?php
         $pageToInclude = "frontend/from_session.php";
@@ -29,5 +35,3 @@
         else
             require_once("error.php");
     ?>
-
-    <a href="inscription.php"><button>Inscription</button></a>

@@ -59,8 +59,11 @@ body {
 }
 
 
-h1{
+h1,p{
     font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    margin-right:10px;
+
 }
 
 
@@ -87,61 +90,6 @@ h1{
 .onglet{
     padding: 25px;
 }
-
-
-/*CSS Inscription*/
-/*.body_inscription {
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-.l_inscription {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-}
-
-.l_inscription {
-    display: block;
-    margin-bottom: 8px;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    padding-right: 30px;
-    background-position: right center;
-    background-repeat: no-repeat;
-}
-
-input[type="submit"] {
-    background-color: #4caf50;
-    color: #fff;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
-}*/
 
 .logout-link {
     color: #0000FF; 
@@ -174,6 +122,8 @@ input[type="submit"]:hover {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #myTable th, #myTable td {
@@ -187,8 +137,21 @@ input[type="submit"]:hover {
 }
 
 /* Style pour les boutons dans la dernière colonne */
-.btn-delete, .btn-nutriment {
+.btn-nutriment {
     background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
+.btn-delete{
+    background-color: rgb(180, 59, 59);
     color: white;
     border: none;
     padding: 5px 10px;
@@ -285,8 +248,23 @@ input[type="submit"]:hover {
     width: 100%;
   }
 
+  .pas_de_compte{
+    background-color: rgb(99, 103, 99);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
   .submit_inscription:hover {
     background-color: #45a049;
   }
 
+  p{
+    font-family: Arial, Helvetica, sans-serif;
+  }
 

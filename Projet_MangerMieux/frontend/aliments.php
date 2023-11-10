@@ -71,13 +71,13 @@
 <table id="myTable" class="display"  style="width:100%">
     <thead>
         <tr>
-            <th>id</th>
-            <th>type</th>
-            <th>nom aliment</th>
-            <th>calories</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Nom aliment</th>
+            <th>Calories</th>
             <th>Bouton</th>
-            <th>showNutriments</th>
-            <th>ajouter à historique</th>
+            <th>Voir nutriments</th>
+            <th>Ajouter à l'historique (entrez la quantité)</th>
         </tr>
     </thead>
 
