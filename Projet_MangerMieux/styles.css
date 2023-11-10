@@ -11,6 +11,26 @@
     padding-bottom: 5px; 
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* CSS pour le lien de déconnexion */
+#deconnection {
+    margin: 20px; 
+    text-align: right;
+}
+
+.logout-link {
+    color: black !important;
+    font-weight: bold;
+    text-decoration: none; 
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 /*CSS Menu Navigation*/
 body {
     background-color: #f4f4f4;

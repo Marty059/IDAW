@@ -1,7 +1,11 @@
 
 <body>
-<header>
-    <h1 class="titre_site">Manger Mieux</h1>
+    <div class="logo-container">
+        <h1 class="titre_site">Manger Mieux</h1>
+        <div id="deconnection">
+            <a class="logout-link" href="index.php?disconnect">Déconnexion</a>
+        </div>
+    </div>
 <?php
     function renderMenuToHTML($currentPageId) {
         // un tableau qui definit la structure du site
