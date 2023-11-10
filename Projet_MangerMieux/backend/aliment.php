@@ -208,5 +208,24 @@ switch($_SERVER["REQUEST_METHOD"]){
             exit();
         }
         else{exit(http_response_code(204));}
+    case 'PUT':
+        $data_array = json_decode(file_get_contents('php://input'), true);
+        echo (json_encode($data_array));
+        $id_aliment = $data_array["id_aliment"];
+        $id_type = $data_array["id_type"];
+        $nom_aliment = $data_array["nom_aliment"];
+        $request = $pdo->prepare("
+        UPDATE aliments
+        SET id_type = :id_type, nom_aliment= :nom_aliment WHERE id_aliment = :id_aliment;
+        UPDATE plats SET  nom_plat= :nom_aliment WHERE id_plat = :id_aliment;
+        ");
+
+
+        $request->bindParam(":id_aliment", $id_aliment, PDO::PARAM_INT);
+        $request->bindParam(":id_type", $id_type, PDO::PARAM_INT);
+        $request->bindParam(":nom_aliment", $nom_aliment, PDO::PARAM_STR);
+        $request->execute();
+        exit();
+
     }
 ?>
