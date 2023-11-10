@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
         
-        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
             $('#myTable').DataTable({
