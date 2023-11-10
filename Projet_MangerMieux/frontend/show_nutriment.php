@@ -16,7 +16,7 @@
 
 </table>
     <script>
-        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
         const idNutr = params.get('id_nutr');
