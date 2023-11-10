@@ -1,6 +1,19 @@
+/*CSS Titre site*/
+.titre_site{
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px #999;
+    text-align: left;
+    margin: 20px;
+    border-bottom: 2px solid #ccc;
+    display: inline-block; 
+    padding-bottom: 5px; 
+}
+
 /*CSS Menu Navigation*/
 body {
-    background: #486298;
+    background-color: #f4f4f4;
     min-height: 100%;
     margin: 0;
     
@@ -15,7 +28,16 @@ body {
     font-size: large;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease-in-out;
 }
+
+.menu_principal:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff; /* Couleur du texte au survol */
+}
+
 
 h1{
     font-family: Arial, Helvetica, sans-serif;
@@ -109,5 +131,81 @@ input[type="submit"]:hover {
     display: block; 
 }
 
+/*CSS show_nutriments*/
+#myTable_nutriments {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
 
-  
+#myTable_nutriments th, #myTable_nutriments td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#myTable_nutriments th {
+    background-color: #f2f2f2;
+}
+
+/*CSS datables*/
+/* Style de base pour DataTables */
+#myTable {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#myTable th, #myTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#myTable th {
+    background-color: #f2f2f2;
+}
+
+/* Style pour les boutons dans la dernière colonne */
+.btn-delete, .btn-nutriment {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
+/* Style pour les formulaires dans la dernière colonne */
+.delete-form, .nutriment-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Style pour le champ de texte ajouté dans la dernière colonne */
+#add_histo {
+    font-family: Arial, sans-serif;
+    width: 50px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Style pour la barre de recherche en haut de la table */
+.dataTables_filter {
+    font-family: Arial, sans-serif;
+    float: right;
+}
+
+/* Style pour la pagination en bas de la table */
+.dataTables_paginate {
+    font-family: Arial, sans-serif;
+    float: right;
+}
+
