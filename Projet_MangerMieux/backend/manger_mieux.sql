@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : ven. 10 nov. 2023 à 13:43
+-- HÃ´te : 127.0.0.1:3306
+-- GÃ©nÃ©rÃ© le : ven. 10 nov. 2023 Ã  21:32
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `manger_mieux`
+-- Base de donnÃ©es : `manger_mieux`
 --
 
 -- --------------------------------------------------------
@@ -33,19 +33,28 @@ CREATE TABLE IF NOT EXISTS `aliments` (
   `ID_TYPE` int NOT NULL,
   `NOM_ALIMENT` varchar(100) DEFAULT NULL,
   `Kcal` int NOT NULL,
+  `CODE` bigint NOT NULL,
   PRIMARY KEY (`ID_ALIMENT`),
   KEY `NOM_ALIMENT` (`NOM_ALIMENT`),
   KEY `FK_ASSOCIATION_ALIMENT` (`ID_TYPE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `aliments`
+-- DÃ©chargement des donnÃ©es de la table `aliments`
 --
 
-INSERT INTO `aliments` (`ID_ALIMENT`, `ID_TYPE`, `NOM_ALIMENT`, `Kcal`) VALUES
-(1, 4, 'Poulet', 106),
-(2, 2, 'Tomates', 0),
-(3, 3, 'P?tes', 0);
+INSERT INTO `aliments` (`ID_ALIMENT`, `ID_TYPE`, `NOM_ALIMENT`, `Kcal`, `CODE`) VALUES
+(1, 1, 'pasta', 359, 8076800195057),
+(2, 1, 'filet de poulet blanc', 106, 3266980123994),
+(3, 5, 'Prince Chocolat biscuits au bl? complet', 467, 7622210449283),
+(4, 1, 'Mes Carottes r?p?es ? la ciboulette', 79, 3281780894950),
+(5, 1, 'Haricots Verts Extra-fins Pr?cuits Vapeur', 32, 3083680019408),
+(6, 6, 'Nutella', 539, 3017620422003),
+(7, 7, 'Le Pur B?uf - Steaks hach?s surgel?s', 209, 3227061000023),
+(8, 8, 'Bananes', 90, 3347761000670),
+(9, 1, 'Kiwi', 54, 94009569),
+(11, 10, '6 ?ufs frais de poules ?lev?es au sol', 140, 3560071098278),
+(12, 1, 'Tropicana 100% oranges press?es sans pulpe format familial 1,5 L', 43, 3502110006790);
 
 -- --------------------------------------------------------
 
@@ -63,12 +72,50 @@ CREATE TABLE IF NOT EXISTS `composition_aliment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `composition_aliment`
+-- DÃ©chargement des donnÃ©es de la table `composition_aliment`
 --
 
 INSERT INTO `composition_aliment` (`ID_ALIMENT`, `ID_NUTRIMENT`, `QUANTITE_POUR_100G`) VALUES
-(1, 1, 23),
-(1, 3, 1.5);
+(1, 1, 13),
+(1, 2, 3.5),
+(1, 3, 2),
+(1, 4, 3),
+(2, 1, 23),
+(2, 3, 1.5),
+(3, 1, 6.3),
+(3, 2, 32),
+(3, 3, 17),
+(3, 4, 4),
+(4, 1, 1.1),
+(4, 2, 5),
+(4, 3, 5.2),
+(4, 4, 2.8),
+(5, 1, 2),
+(5, 2, 1.7),
+(5, 3, 0.2),
+(5, 4, 3.1),
+(6, 1, 6.3),
+(6, 2, 56.3),
+(6, 3, 30.9),
+(7, 1, 18.5),
+(7, 3, 15),
+(7, 7, 0.0023),
+(8, 1, 0.98),
+(8, 2, 14.8),
+(8, 3, 0.25),
+(8, 4, 1.9),
+(9, 1, 0.9),
+(9, 2, 11),
+(9, 3, 0.3),
+(9, 4, 1.1),
+(9, 5, 0.152),
+(11, 1, 13),
+(11, 2, 0.5),
+(11, 3, 9.8),
+(12, 1, 0.8),
+(12, 2, 8.9),
+(12, 4, 0.6),
+(12, 5, 0.022);
 
 -- --------------------------------------------------------
 
@@ -86,13 +133,21 @@ CREATE TABLE IF NOT EXISTS `composition_plat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `composition_plat`
+-- DÃ©chargement des donnÃ©es de la table `composition_plat`
 --
 
 INSERT INTO `composition_plat` (`ID_PLAT`, `ID_ALIMENT`, `POURCENTAGE`) VALUES
-(1, 2, 50),
-(1, 3, 50),
-(2, 1, 100);
+(1, 1, 100),
+(2, 2, 100),
+(3, 3, 100),
+(4, 4, 100),
+(5, 5, 100),
+(6, 6, 100),
+(7, 7, 100),
+(8, 8, 100),
+(9, 9, 100),
+(11, 11, 100),
+(12, 12, 100);
 
 -- --------------------------------------------------------
 
@@ -102,22 +157,26 @@ INSERT INTO `composition_plat` (`ID_PLAT`, `ID_ALIMENT`, `POURCENTAGE`) VALUES
 
 DROP TABLE IF EXISTS `historique`;
 CREATE TABLE IF NOT EXISTS `historique` (
-
-  `ID_HISTORIQUE` int NOT NULL,	
+  `ID_HISTORIQUE` int NOT NULL,
   `ID_USER` int NOT NULL,
   `ID_PLAT` int NOT NULL,
   `DATE` date DEFAULT NULL,
   `QUANTITE` int DEFAULT NULL,
-  PRIMARY KEY (`ID_HISTORIQUE`)
+  PRIMARY KEY (`ID_HISTORIQUE`),
+  KEY `FK_HISTORIQUE` (`ID_USER`),
+  KEY `FK_HISTORIQUE2` (`ID_PLAT`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `historique`
+-- DÃ©chargement des donnÃ©es de la table `historique`
 --
 
-INSERT INTO `historique` (`ID_USER`, `ID_PLAT`, `DATE`, `ID_HISTORIQUE`, `QUANTITE`) VALUES
-(1, 1, '2023-11-09', 1, NULL),
-(2, 1, '2023-11-09', 3, NULL);
+INSERT INTO `historique` (`ID_HISTORIQUE`, `ID_USER`, `ID_PLAT`, `DATE`, `QUANTITE`) VALUES
+(3, 1, 1, '2023-11-10', 1),
+(4, 1, 1, '2023-11-10', 76),
+(5, 1, 2, '2023-11-10', 100),
+(6, 1, 1, '2023-11-10', 65),
+(7, 1, 1, '2023-11-10', 45);
 
 -- --------------------------------------------------------
 
@@ -134,20 +193,20 @@ CREATE TABLE IF NOT EXISTS `nutriments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `nutriments`
+-- DÃ©chargement des donnÃ©es de la table `nutriments`
 --
 
 INSERT INTO `nutriments` (`ID_NUTRIMENT`, `NOM_NUTRIMENT`) VALUES
 (6, 'calcium'),
-(3, 'fat'),
-(4, 'fiber'),
-(7, 'iron'),
+(3, 'gras'),
+(4, 'fibre'),
+(7, 'fer'),
 (10, 'potassium'),
-(1, 'proteins'),
-(2, 'sugars'),
-(8, 'vitamin-a'),
-(5, 'vitamin-c'),
-(9, 'vitamin-d');
+(1, 'proteinss'),
+(2, 'sucres'),
+(8, 'vitamine-a'),
+(5, 'vitamine-c'),
+(9, 'vitamine-d');
 
 -- --------------------------------------------------------
 
@@ -164,12 +223,21 @@ CREATE TABLE IF NOT EXISTS `plats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `plats`
+-- DÃ©chargement des donnÃ©es de la table `plats`
 --
 
 INSERT INTO `plats` (`ID_PLAT`, `NOM_PLAT`) VALUES
-(1, 'Pates bolo'),
-(2, 'Poulet');
+(11, 'Oufs frais de poules elevees au sol'),
+(8, 'Bananes'),
+(2, 'filet de poulet blanc'),
+(5, 'Haricots Verts Extra-fins Precuits Vapeur'),
+(9, 'Kiwi'),
+(7, 'Le Pur Boeuf - Steaks haches surgeles'),
+(4, 'Mes Carottes rapees a la ciboulette'),
+(6, 'Nutella'),
+(1, 'pasta'),
+(3, 'Prince Chocolat biscuits au ble complet'),
+(12, 'Tropicana 100% oranges pressees sans pulpe format familial 1,5 L');
 
 -- --------------------------------------------------------
 
@@ -185,11 +253,13 @@ CREATE TABLE IF NOT EXISTS `pratique_sportive` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `pratique_sportive`
+-- DÃ©chargement des donnÃ©es de la table `pratique_sportive`
 --
 
 INSERT INTO `pratique_sportive` (`ID_PRATIQUE`, `NIVEAU`) VALUES
-(1, 'Faible');
+(1, 'Faible'),
+(2, 'Moyen'),
+(3, 'Fort');
 
 -- --------------------------------------------------------
 
@@ -205,14 +275,20 @@ CREATE TABLE IF NOT EXISTS `type_aliment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `type_aliment`
+-- DÃ©chargement des donnÃ©es de la table `type_aliment`
 --
 
 INSERT INTO `type_aliment` (`ID_TYPE`, `NOM_TYPE`) VALUES
-(1, 'unsweetened-beverages'),
-(2, 'vegetables'),
-(3, 'cereals'),
-(4, 'poultry');
+(1, 'boissons-non-sucrees'),
+(2, 'legumes'),
+(3, 'cereales'),
+(4, 'poultry'),
+(5, 'biscuits-et-gateaux'),
+(6, 'bonbons'),
+(7, 'viandes-autres-que-la-volaille'),
+(8, 'fruits'),
+(9, 'desserts-lactes'),
+(10, 'oeufs');
 
 -- --------------------------------------------------------
 
@@ -239,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
 --
--- Déchargement des données de la table `users`
+-- DÃ©chargement des donnÃ©es de la table `users`
 --
 
 INSERT INTO `users` (`ID_USER`, `ID_PRATIQUE`, `NOM`, `PRENOM`, `GENRE`, `TAILLE`, `POIDS`, `AGE`, `LOGIN`, `MOT_DE_PASSE`) VALUES
@@ -247,10 +323,14 @@ INSERT INTO `users` (`ID_USER`, `ID_PRATIQUE`, `NOM`, `PRENOM`, `GENRE`, `TAILLE
 (2, 1, 'm', 'm', 'masculin', 178, 78, 23, 'm', 'm'),
 (3, 1, 'Delsart', 'Martin', 'masculin', 178, 80, 22, 'Marty', 'a'),
 (4, 1, 'Delsart', 'Martin', 'masculin', 180, 80, 22, 'Armand', 'a'),
-(5, 1, 'test', 'client', 'masculin', 183, 79, 22, 'Client', 'azert');
+(5, 1, 'test', 'client', 'masculin', 183, 79, 22, 'Client', 'azert'),
+(6, 1, 'admin', 'admin', 'homme', 1, 1, 1, 'admin', 'admin'),
+(7, 3, 'piat', 'antonin', 'masculin', 170, 60, 21, 'antoninpiat', 'piat'),
+(8, 1, 'p', 'p', 'masculin', 1, 1, 1, 'p', 'p'),
+(9, 2, 'a', 'a', 'masculin', 1, 1, 1, 'a', 'a');
 
 --
--- Contraintes pour les tables déchargées
+-- Contraintes pour les tables dÃ©chargÃ©es
 --
 
 --

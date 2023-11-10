@@ -88,7 +88,7 @@
             <th>Bouton</th>
             <th>Voir nutriments</th>
             <th>Ajouter à l'historique (entrez la quantité)</th>
-            <th>Mofifier</th>
+            <th>Modifier</th>
         </tr>
     </thead>
 
@@ -110,8 +110,8 @@
             error: function (error) {
                 console.error('Erreur lors de la suppression', error);
             }
-        });}
-        else{alert("vous ne pouvez pas";)}
+        })}
+        else{alert("vous ne pouvez pas")}
     }
     function showNutriments(idAliment) {
 
