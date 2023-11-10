@@ -5,7 +5,9 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <title>exo2</title>
     <script>
+
         PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
+
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
             $('#myTable').DataTable({

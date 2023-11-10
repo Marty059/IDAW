@@ -3,7 +3,7 @@
     <h1>
        Table des nutriments 
     </h1>
-    <table id="myTable" class="display"  style="width:100%">
+    <table id="myTable_nutriments" class="display"  style="width:100%">
     <thead>
         <tr>
             <th>nom</th>
@@ -44,4 +44,7 @@
     </script>
 </div>
 </body>
+<style>
+      
+    </style>
 </html>
