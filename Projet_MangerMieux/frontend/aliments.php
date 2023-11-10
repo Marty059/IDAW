@@ -122,23 +122,24 @@
         })
     }
     function ajout_food(){
-        let code = $('#add_food').val();
-        console.log("dans la fonction");
-        console.log(code);
+        let code_ = $('#add_food').val();
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend/aliment.php', 
-            data: JSON.stringify({ code:code  }),
+            url: PREFIX + '/aliment.php', 
+            data: JSON.stringify({ code:code_ }),
             contentType: 'application/json',
+            headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+          cors: true ,
             success: function (response) {
-                console.log("c'est un succès")
                 // Mettez à jour votre tableau après la suppression
-                $('#myTable').DataTable().ajax.reload();
+                
             },
             error: function (error) {
-                console.log("ça va ici");
-                console.error('Erreur lors de la suppression', error);}
-        })
+                console.log("AJAX error in request: " + JSON.stringify(error, null, 2));
+            }
+        });
     }
 </script>
 </body>

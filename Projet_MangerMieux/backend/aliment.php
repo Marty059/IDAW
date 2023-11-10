@@ -51,6 +51,7 @@ function aliment_existe($code,$pdo){
 
 }
 function ajouter_nutriments($data,$pdo){
+    set_time_limit(60);
     //ajoute les nutriments du dernier aliments
     $id_aliment= get_last_id_food($pdo);
     $request = $pdo->prepare("SELECT * FROM Nutriments");
@@ -78,6 +79,7 @@ function ajouter_nutriments($data,$pdo){
    }
 }
 function ajouter_type($data,$pdo){ 
+    set_time_limit(60);
     //vérifie si le type existe et s'il existe pas créer un nouveau type 
     $type=$data["product"]["food_groups"];
     $type = substr($type,3);//nom du type
@@ -108,6 +110,7 @@ function ajouter_type($data,$pdo){
     
 }
 function ajouter_aliment($code,$data,$pdo){
+    set_time_limit(60);
     $pourcentage=100;
     $kcal=$data["product"]["nutriments"]["energy-kcal"];
     $id_aliment = get_last_id_food($pdo);
