@@ -1,4 +1,4 @@
-<h1>hello</h1>
+<h1>Liste des aliments connus par notre site</h1>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
