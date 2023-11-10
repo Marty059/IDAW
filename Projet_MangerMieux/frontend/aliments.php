@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
         
-        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
             $('#myTable').DataTable({
@@ -81,7 +81,7 @@
 
             // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
             
-            window.location.href = "http://localhost/Projet_martin/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
+            window.location.href = "http://localhost/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
 }
 </script>
 </body>
