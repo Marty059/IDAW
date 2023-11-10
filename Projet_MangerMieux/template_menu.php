@@ -1,4 +1,5 @@
 
+<body>
 <header>
     <h1 class="titre_site">Manger Mieux</h1>
 <?php
