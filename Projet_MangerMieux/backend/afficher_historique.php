@@ -1,8 +1,17 @@
 <?php
 require_once("init_data.php");
-header('Content-Type: application/json');
+function id_user($pdo,$data){
+    $login = $data["login"];
+    $password = $data["password"];
+    $request=$pdo->prepare("select ID_USER from USERS WHERE LOGIN = :login AND MOT_DE_PASSE = :password");
+    $request->bindParam(':login', $login, PDO::PARAM_INT);
+    $request->bindParam(':password', $password, PDO::PARAM_INT);
+    $request->execute();
+    $id=$request->fetchColumn();
+    return $id;
+}
 switch($_SERVER["REQUEST_METHOD"]){
-    // donne l'historique d'un utilisateur
+    //donne l'historique d'un utilisateur
     case 'POST':
         $data_array = json_decode(file_get_contents('php://input'), true);
         $login = $data_array["login"];
@@ -24,5 +33,4 @@ switch($_SERVER["REQUEST_METHOD"]){
         $request->execute();  
         $resultat = $request->fetchAll(PDO::FETCH_OBJ);      
         exit(json_encode($resultat));
-}
-?>
+    }
