@@ -1,4 +1,10 @@
 /*CSS Menu Navigation*/
+body {
+    background: #486298;
+    min-height: 100%;
+    margin: 0;
+    
+}
 .menu_principal {
     margin-top: 20px;
     background-color:#1ba539;
