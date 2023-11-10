@@ -63,7 +63,7 @@
         $.ajax({
             type: 'DELETE',
             url: PREFIX + '/historique.php', 
-            data: JSON.stringify({ login: login, password: password,id: idHistorique}),
+            data: JSON.stringify({ id_historique: idHistorique}),
             contentType: 'application/json',
             success: function (response) {
                 // Mettez à jour votre tableau après la suppression

@@ -44,12 +44,10 @@ switch($_SERVER["REQUEST_METHOD"]){
         }
     case 'DELETE':
         $data_array = json_decode(file_get_contents('php://input'), true);
-        $id_plat = $data_array["id_plat"];
+        $id_historique = $data_array["id_historique"];
         //récupère id user
-        $id_user = id_user($pdo,$data_array);
-        $request = $pdo->prepare("DELETE FROM HISTORIQUE WHERE id_user = :id_user AND id_plat = :id_plat;");
-        $request->bindParam(':id_user', $id_user, PDO::PARAM_INT);
-        $request->bindParam(':id_plat', $id_plat, PDO::PARAM_INT);
+        $request = $pdo->prepare("DELETE FROM HISTORIQUE WHERE id_historique = :id_historique;");
+        $request->bindParam(':id_historique', $id_historique, PDO::PARAM_INT);
         $request->execute();
     }
 
