@@ -7,6 +7,7 @@
         </div>
     </div>
 <?php
+    
     function renderMenuToHTML($currentPageId) {
         // un tableau qui definit la structure du site
         $mymenu = array(

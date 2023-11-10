@@ -51,6 +51,7 @@ function aliment_existe($code,$pdo){
 
 }
 function ajouter_nutriments($data,$pdo){
+    set_time_limit(60);
     //ajoute les nutriments du dernier aliments
     $id_aliment= get_last_id_food($pdo);
     $request = $pdo->prepare("SELECT * FROM Nutriments");
@@ -78,6 +79,7 @@ function ajouter_nutriments($data,$pdo){
    }
 }
 function ajouter_type($data,$pdo){ 
+    set_time_limit(60);
     //vérifie si le type existe et s'il existe pas créer un nouveau type 
     $type=$data["product"]["food_groups"];
     $type = substr($type,3);//nom du type
@@ -108,6 +110,7 @@ function ajouter_type($data,$pdo){
     
 }
 function ajouter_aliment($code,$data,$pdo){
+    set_time_limit(60);
     $pourcentage=100;
     $kcal=$data["product"]["nutriments"]["energy-kcal"];
     $id_aliment = get_last_id_food($pdo);
@@ -124,7 +127,6 @@ function ajouter_aliment($code,$data,$pdo){
     $request->bindParam(':code',$code , PDO::PARAM_INT);
     $request->execute();
     //comme un aliment est un plat on ajoute l'aliment dans la table plat
-    echo  $nomAliment;
     $request = $pdo->prepare("INSERT INTO PLATS (ID_PLAT,NOM_PLAT) VALUES (:idPlat,:nomAliment)");
     $request->bindParam(':idPlat', $id_plat, PDO::PARAM_INT);
     $request->bindParam(':nomAliment', $nomAliment,PDO::PARAM_STR);
@@ -174,6 +176,7 @@ switch($_SERVER["REQUEST_METHOD"]){
         else{exit(http_response_code(204));}
 
     case 'POST':
+        set_time_limit(60);
         $data_array = json_decode(file_get_contents('php://input'), true);
         $code = $data_array["code"];
         if ($data_array !== null && isset($data_array["code"])) {
@@ -185,7 +188,7 @@ switch($_SERVER["REQUEST_METHOD"]){
             if($count==0){
                 ajouter_aliment($code,$data,$pdo);
                 ajouter_nutriments($data,$pdo);
-                exit();
+                exit(json_encode(array()));
             }
             else {
                 echo "l'aliment existe déjà";
