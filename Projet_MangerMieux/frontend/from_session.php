@@ -19,7 +19,7 @@
                         window.location.href = './index.php'
                         }
                         else{
-                            $("#message").text("pas possible de ce connecter : ");
+                            $("#message").text("Identifiant ou mot de passe incorrect");
                         }
                     },
                     error: function(error) {

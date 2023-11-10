@@ -15,7 +15,6 @@
             'accueil' => array( 'Accueil' ),
             'aliments' => array( 'Aliments' ),
             'historique' => array('Mon historique'),
-            'compte' => array('Mon compte'),
             'credits' => array('A propos')
         );
         echo '<nav class="menu">';

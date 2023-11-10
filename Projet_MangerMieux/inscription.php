@@ -7,4 +7,4 @@
         require_once("error.php");
 ?>
 
-<a href="login.php"><button>Retour a la page de connection</button></a>
+<a href="login.php"><button class="pas_de_compte">Retour a la page de connexion</button></a>
