@@ -3,7 +3,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <title>exo2</title>
     <script>
 
         PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
@@ -16,7 +15,6 @@
                         dataSrc: ''
                     },
                     columns: [
-                        { data: 'ID_ALIMENT' },
                         { data: 'ID_TYPE' },
                         { data: 'NOM_ALIMENT' },
                         { data: 'Kcal'},
@@ -72,6 +70,7 @@
 <div>
     <form class = "add-food" onsubmit= "ajout_food()" >
         <div class="col-sm-2">
+            <label>Entrez le code barre</label>
             <input type="text" id="add_food">
             <input type="submit" class="btn-food" value="add">
         </div>
@@ -81,13 +80,12 @@
 <table id="myTable" class="display"  style="width:100%">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Type</th>
             <th>Nom aliment</th>
             <th>Calories</th>
             <th>Bouton</th>
             <th>Voir nutriments</th>
-            <th>Ajouter à l'historique (entrez la quantité)</th>
+            <th>Ajouter à l'historique (entrez la quantité en grammes)</th>
             <th>Modifier</th>
         </tr>
     </thead>
@@ -111,7 +109,7 @@
                 console.error('Erreur lors de la suppression', error);
             }
         })}
-        else{alert("vous ne pouvez pas")}
+        else{alert("Vous devez être administrateur pour avoir ces droits")}
     }
     function showNutriments(idAliment) {
 
