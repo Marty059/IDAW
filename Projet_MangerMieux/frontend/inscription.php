@@ -1,3 +1,4 @@
+<body class="body_inscription">
 <form id="inscriptionForm" action="" method="post">
     <h2>Inscription au Tracker Alimentaire</h2>
 
@@ -38,7 +39,7 @@
     </select>
 
     <input type="submit" value="S'inscrire">
-  </form>
+</body>
 
   <script>
     PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';

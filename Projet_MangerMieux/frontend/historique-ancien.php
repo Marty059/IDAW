@@ -9,9 +9,8 @@
         PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
         $(document).ready(function(){
             // Récupérer les données de session PHP
-            var login = '<?php echo isset($_SESSION['login']) ? $_SESSION['login'] : ''; ?>';
-            var password = '<?php echo isset($_SESSION['password']) ? $_SESSION['password'] : ''; ?>';
-
+            var login = "a";
+            var password = "b";
             console.log(PREFIX + '/historique-bis.php');
             $('#myTable').DataTable({
                     ajax: {
@@ -57,11 +56,11 @@
 
 </table>
 <script>
-    function onDelete(idPlat) {
+    /*function onDelete(idAliment) {
         $.ajax({
             type: 'DELETE',
             url: PREFIX + '/aliment.php', 
-            data: JSON.stringify({ id: idPlat}),
+            data: JSON.stringify({ id: idAliment }),
             contentType: 'application/json',
             success: function (response) {
                 // Mettez à jour votre tableau après la suppression
@@ -71,7 +70,7 @@
                 console.error('Erreur lors de la suppression', error);
             }
         });
-    }
+    }*/
 </script>
 </body>
 </html>

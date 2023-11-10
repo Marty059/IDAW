@@ -1,9 +1,9 @@
 <?php
 require_once("init_data.php");
-
+header('Content-Type: application/json');
 switch($_SERVER["REQUEST_METHOD"]){
     // donne l'historique d'un utilisateur
-    case 'GET':
+    case 'POST':
         $data_array = json_decode(file_get_contents('php://input'), true);
         $login = $data_array["login"];
         $password = $data_array["password"];
