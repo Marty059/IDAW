@@ -11,20 +11,18 @@
             // Récupérer les données de session PHP
             var login = '<?php echo isset($_SESSION['login']) ? $_SESSION['login'] : ''; ?>';
             var password = '<?php echo isset($_SESSION['password']) ? $_SESSION['password'] : ''; ?>';
-            console.log(login);
             console.log(PREFIX + '/historique-bis.php');
             $('#myTable').DataTable({
                     ajax: {
                         url: PREFIX + '/historique-bis.php',
-                        type: 'GET',
+                        type: "GET",
+                        dataType : "json",
                         data: function(d){
                             return JSON.stringify({ login: login, password: password });
                         },
-                        contentType: 'application/json',
                         dataSrc: ''
                     },
                     columns: [
-                        { data : 'ID_USER'},
                         { data: 'ID_PLAT' },
                         { data: 'NOM_PLAT' },
                         { data: 'DATE'},
@@ -49,8 +47,7 @@
 <table id="myTable" class="display"  style="width:100%">
     <thead>
         <tr>
-            <th>id_user</th>
-            <th>id_plat</th>
+            <th>id</th>
             <th>nom plat</th>
             <th>date</th>
             <th>Supprimer</th>
