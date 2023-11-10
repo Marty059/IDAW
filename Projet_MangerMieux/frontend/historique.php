@@ -24,7 +24,7 @@
                         dataSrc: ''
                     },
                     columns: [
-                        { data: 'ID_HISTORIQUE' },
+                        //{ data: 'ID_HISTORIQUE' },
                         { data: 'NOM_PLAT' },
                         { data: 'DATE'},
                         { data: 'QUANTITE'},
@@ -49,7 +49,7 @@
 <table id="myTable" class="display"  style="width:100%">
     <thead>
         <tr>
-            <th>id</th>
+            
             <th>nom plat</th>
             <th>date</th>
             <th>Quantité</th>
@@ -63,7 +63,7 @@
         $.ajax({
             type: 'DELETE',
             url: PREFIX + '/historique.php', 
-            data: JSON.stringify({ login: login, password: password,id: idHistorique}),
+            data: JSON.stringify({ id_historique: idHistorique}),
             contentType: 'application/json',
             success: function (response) {
                 // Mettez à jour votre tableau après la suppression
