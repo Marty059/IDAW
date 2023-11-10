@@ -45,7 +45,7 @@
     </select>
 
     <input class="submit_inscription" type="submit" value="S'inscrire">
-</body>
+</form>
 
   <script>
     PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';

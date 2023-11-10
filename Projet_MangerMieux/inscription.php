@@ -6,3 +6,5 @@
     else
         require_once("error.php");
 ?>
+
+<a href="login.php"><button>Retour a la page de connection</button></a>

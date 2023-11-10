@@ -1,1 +1,3 @@
-<h1>Bonjour<h1>
+<h1>Bonjour <?php echo $_SESSION['login'] ; ?> !</h1>
+
+<p>Bienvenue sur Manger Mieux, votre compagnon dédié à une alimentation saine et équilibrée ! Notre mission est de vous accompagner dans votre parcours vers une vie plus saine en vous fournissant des outils simples et efficaces pour surveiller votre alimentation. Explorez nos ressources, découvrez des recettes nutritives, et bénéficiez de conseils personnalisés pour atteindre vos objectifs de bien-être. Ensemble, construisons un mode de vie où se régaler rime avec se nourrir intelligemment. Manger Mieux, parce que chaque bouchée compte pour une vie meilleure !</p>
