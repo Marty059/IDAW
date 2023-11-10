@@ -18,7 +18,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         $data_array = json_decode(file_get_contents('php://input'), true);
         $id_user = id_user($pdo,$data_array);
 
-        // maintenant, je récupère l'historique avec le nom du plat, ID_HISTORIQUE et QUANTITE
+        // maintenant, on récupère l'historique avec le nom du plat, ID_HISTORIQUE et QUANTITE
         $request = $pdo->prepare("SELECT h.ID_HISTORIQUE, h.QUANTITE, h.DATE, p.NOM_PLAT
         FROM HISTORIQUE h
         JOIN PLATS p ON h.ID_PLAT = p.ID_PLAT

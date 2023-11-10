@@ -7,9 +7,9 @@
                 var password = $("#password").val();
                 let prefixe = 'http://localhost/IDAW/Projet_MangerMieux/backend/'
                 $.ajax({
-                    url: prefixe+'open_session.php', // Remplacez par l'URL de votre API
+                    url: prefixe+'open_session.php', 
                     method: 'POST',
-                    contentType: 'application/json', // Définissez le type de contenu comme JSON
+                    contentType: 'application/json', 
                     data: JSON.stringify({ login: login, password: password }),
                     dataType: 'json',
                     success: function(response) {
