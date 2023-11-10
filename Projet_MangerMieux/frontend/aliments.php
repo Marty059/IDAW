@@ -15,8 +15,8 @@
                         dataSrc: ''
                     },
                     columns: [
-                        { data: 'ID_TYPE' },
                         { data: 'NOM_ALIMENT' },
+                        { data: 'ID_TYPE' },
                         { data: 'Kcal'},
                         {
 
@@ -80,8 +80,8 @@
 <table id="myTable" class="display"  style="width:100%">
     <thead>
         <tr>
-            <th>Type</th>
             <th>Nom aliment</th>
+            <th>Type</th>
             <th>Calories</th>
             <th>Bouton</th>
             <th>Voir nutriments</th>

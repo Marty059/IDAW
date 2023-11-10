@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `plats` (
 --
 
 INSERT INTO `plats` (`ID_PLAT`, `NOM_PLAT`) VALUES
-(11, '6Oufs frais de poules elevees au sol'),
+(11, '6 oeufs frais de poules elevees au sol'),
 (8, 'Bananes'),
 (2, 'filet de poulet blanc'),
 (5, 'Haricots Verts Extra-fins Precuits Vapeur'),
