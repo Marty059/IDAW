@@ -46,15 +46,15 @@ CREATE TABLE IF NOT EXISTS `aliments` (
 INSERT INTO `aliments` (`ID_ALIMENT`, `ID_TYPE`, `NOM_ALIMENT`, `Kcal`, `CODE`) VALUES
 (1, 1, 'pasta', 359, 8076800195057),
 (2, 1, 'filet de poulet blanc', 106, 3266980123994),
-(3, 5, 'Prince Chocolat biscuits au bl? complet', 467, 7622210449283),
-(4, 1, 'Mes Carottes r?p?es ? la ciboulette', 79, 3281780894950),
-(5, 1, 'Haricots Verts Extra-fins Pr?cuits Vapeur', 32, 3083680019408),
+(3, 5, 'Prince Chocolat biscuits au ble complet', 467, 7622210449283),
+(4, 1, 'Mes Carottes rapees a la ciboulette', 79, 3281780894950),
+(5, 1, 'Haricots Verts Extra-fins Precuits Vapeur', 32, 3083680019408),
 (6, 6, 'Nutella', 539, 3017620422003),
-(7, 7, 'Le Pur B?uf - Steaks hach?s surgel?s', 209, 3227061000023),
+(7, 7, 'Le Pur Boeuf - Steaks haches surgeles', 209, 3227061000023),
 (8, 8, 'Bananes', 90, 3347761000670),
 (9, 1, 'Kiwi', 54, 94009569),
-(11, 10, '6 ?ufs frais de poules ?lev?es au sol', 140, 3560071098278),
-(12, 1, 'Tropicana 100% oranges press?es sans pulpe format familial 1,5 L', 43, 3502110006790);
+(11, 10, '6 oeufs frais de poules elevees au sol', 140, 3560071098278),
+(12, 1, 'Tropicana 100% oranges pressees sans pulpe format familial 1,5 L', 43, 3502110006790);
 
 -- --------------------------------------------------------
 
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `plats` (
 --
 
 INSERT INTO `plats` (`ID_PLAT`, `NOM_PLAT`) VALUES
-(11, 'Oufs frais de poules elevees au sol'),
+(11, '6Oufs frais de poules elevees au sol'),
 (8, 'Bananes'),
 (2, 'filet de poulet blanc'),
 (5, 'Haricots Verts Extra-fins Precuits Vapeur'),

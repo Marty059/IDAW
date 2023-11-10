@@ -1,5 +1,6 @@
 <?php
     require_once("template_header.php");
+    require_once("backend/init_data.php");
 ?>
 
 <body class="body_inscription">
