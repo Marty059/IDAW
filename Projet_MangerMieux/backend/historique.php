@@ -10,40 +10,31 @@ function id_user($pdo,$data){
     $id=$request->fetchColumn();
     return $id;
 }
+function get_last_id_histo($pdo){
+    $request = $pdo->prepare("SELECT MAX(ID_HISTORIQUE) FROM historique");
+    $request->execute();
+    $resultat= $request->fetchColumn();
+    if(!isset($resultat)){
+        $id = 0;
+    }
+    else{ $id = $resultat;}
+    return $id;
+}
 switch($_SERVER["REQUEST_METHOD"]){
-    //donne l'historique d'un utilisateur
-    case 'GET':
-        $data_array = json_decode(file_get_contents('php://input'), true);
-        $login = $data_array["login"];
-        $password = $data_array["password"];
-
-        // il faut récupérer l'id de l'utilisateur
-        $request = $pdo->prepare("SELECT ID_USER FROM USERS WHERE LOGIN = :login AND MOT_DE_PASSE = :password");
-        $request->bindParam(':login', $login, PDO::PARAM_STR);
-        $request->bindParam(':password', $password, PDO::PARAM_STR);
-        $request->execute();
-        $id_user = $request->fetchColumn();
-
-        // maintenant, je récupère l'historique avec le nom du plat
-        $request = $pdo->prepare("SELECT h.*, p.NOM_PLAT
-            FROM HISTORIQUE h
-            JOIN PLATS p ON h.ID_PLAT = p.ID_PLAT
-            WHERE h.ID_USER = :id_user");
-        $request->bindParam(':id_user', $id_user, PDO::PARAM_INT);
-        $request->execute();  
-        $resultat = $request->fetchAll(PDO::FETCH_OBJ);      
-        exit(json_encode($resultat));
-    //ajoute un aliment dans l'historique 
     case 'POST':
         $data_array = json_decode(file_get_contents('php://input'), true);
         $id_user = id_user($pdo,$data_array);
         $id_plat = $data_array["id_plat"];
+        $id_historique = get_last_id_histo($pdo)+1;
         $date = date('Y-m-d ');;
+        $quantite = $data_array["quantite"];
         if ($data_array !== null && isset($data_array["id_plat"])){
-            $request = $pdo->prepare("INSERT INTO HISTORIQUE (ID_USER,ID_PLAT,DATE) VALUES (:idUser,:idPlat,:date)");
+            $request = $pdo->prepare("INSERT INTO HISTORIQUE (ID_HISTORIQUE,ID_USER,ID_PLAT,DATE,Quantité) VALUES (:id_histo,:idUser,:idPlat,:date,:quantite)");
             $request->bindParam(':idUser', $id_user, PDO::PARAM_INT);
             $request->bindParam(':idPlat', $id_plat, PDO::PARAM_INT);
             $request->bindParam(':date', $date, PDO::PARAM_STR);
+            $request->bindParam(':quantite', $quantite, PDO::PARAM_INT);
+            $request->bindParam(':id_histo', $id_historique, PDO::PARAM_INT);
             $request->execute();
             exit();
         }

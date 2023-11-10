@@ -185,9 +185,11 @@ switch($_SERVER["REQUEST_METHOD"]){
             if($count==0){
                 ajouter_aliment($code,$data,$pdo);
                 ajouter_nutriments($data,$pdo);
+                exit();
             }
             else {
                 echo "l'aliment existe déjà";
+                exit();
             }
         }
         exit();
