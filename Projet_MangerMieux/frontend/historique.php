@@ -24,7 +24,7 @@
                         dataSrc: ''
                     },
                     columns: [
-                        { data: 'ID_HISTORIQUE' },
+                        //{ data: 'ID_HISTORIQUE' },
                         { data: 'NOM_PLAT' },
                         { data: 'DATE'},
                         { data: 'QUANTITE'},
@@ -49,7 +49,7 @@
 <table id="myTable" class="display"  style="width:100%">
     <thead>
         <tr>
-            <th>id</th>
+            
             <th>nom plat</th>
             <th>date</th>
             <th>Quantité</th>

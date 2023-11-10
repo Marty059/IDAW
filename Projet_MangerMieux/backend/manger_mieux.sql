@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 06 nov. 2023 à 13:50
+-- Généré le : ven. 10 nov. 2023 à 13:43
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -43,7 +43,9 @@ CREATE TABLE IF NOT EXISTS `aliments` (
 --
 
 INSERT INTO `aliments` (`ID_ALIMENT`, `ID_TYPE`, `NOM_ALIMENT`, `Kcal`) VALUES
-(1, 4, 'Poulet', 106);
+(1, 4, 'Poulet', 106),
+(2, 2, 'Tomates', 0),
+(3, 3, 'P?tes', 0);
 
 -- --------------------------------------------------------
 
@@ -83,6 +85,15 @@ CREATE TABLE IF NOT EXISTS `composition_plat` (
   KEY `FK_COMPOSITION_PLAT2` (`ID_ALIMENT`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
+--
+-- Déchargement des données de la table `composition_plat`
+--
+
+INSERT INTO `composition_plat` (`ID_PLAT`, `ID_ALIMENT`, `POURCENTAGE`) VALUES
+(1, 2, 50),
+(1, 3, 50),
+(2, 1, 100);
+
 -- --------------------------------------------------------
 
 --
@@ -91,12 +102,22 @@ CREATE TABLE IF NOT EXISTS `composition_plat` (
 
 DROP TABLE IF EXISTS `historique`;
 CREATE TABLE IF NOT EXISTS `historique` (
+
+  `ID_HISTORIQUE` int NOT NULL,	
   `ID_USER` int NOT NULL,
   `ID_PLAT` int NOT NULL,
   `DATE` date DEFAULT NULL,
-  PRIMARY KEY (`ID_USER`,`ID_PLAT`),
-  KEY `FK_HISTORIQUE2` (`ID_PLAT`)
+  `QUANTITE` int DEFAULT NULL,
+  PRIMARY KEY (`ID_HISTORIQUE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+--
+-- Déchargement des données de la table `historique`
+--
+
+INSERT INTO `historique` (`ID_USER`, `ID_PLAT`, `DATE`, `ID_HISTORIQUE`, `QUANTITE`) VALUES
+(1, 1, '2023-11-09', 1, NULL),
+(2, 1, '2023-11-09', 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -142,6 +163,14 @@ CREATE TABLE IF NOT EXISTS `plats` (
   KEY `NOM_PLAT` (`NOM_PLAT`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
 
+--
+-- Déchargement des données de la table `plats`
+--
+
+INSERT INTO `plats` (`ID_PLAT`, `NOM_PLAT`) VALUES
+(1, 'Pates bolo'),
+(2, 'Poulet');
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +183,13 @@ CREATE TABLE IF NOT EXISTS `pratique_sportive` (
   `NIVEAU` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID_PRATIQUE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+--
+-- Déchargement des données de la table `pratique_sportive`
+--
+
+INSERT INTO `pratique_sportive` (`ID_PRATIQUE`, `NIVEAU`) VALUES
+(1, 'Faible');
 
 -- --------------------------------------------------------
 
@@ -201,6 +237,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `LOGIN` (`LOGIN`),
   KEY `FK_ASSOCIATION_SPORT` (`ID_PRATIQUE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=geostd8;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`ID_USER`, `ID_PRATIQUE`, `NOM`, `PRENOM`, `GENRE`, `TAILLE`, `POIDS`, `AGE`, `LOGIN`, `MOT_DE_PASSE`) VALUES
+(1, 1, 'Test', 'test', 'test', 100, 100, 30, 'a', 'b'),
+(2, 1, 'm', 'm', 'masculin', 178, 78, 23, 'm', 'm'),
+(3, 1, 'Delsart', 'Martin', 'masculin', 178, 80, 22, 'Marty', 'a'),
+(4, 1, 'Delsart', 'Martin', 'masculin', 180, 80, 22, 'Armand', 'a'),
+(5, 1, 'test', 'client', 'masculin', 183, 79, 22, 'Client', 'azert');
 
 --
 -- Contraintes pour les tables déchargées
