@@ -6,7 +6,7 @@
     <title>exo2</title>
     <script>
 
-        PREFIX = 'http://localhost/Projet_martin/IDAW/Projet_MangerMieux/backend';
+        PREFIX = 'http://localhost/IDAW/Projet_MangerMieux/backend';
 
         $(document).ready(function(){
             console.log(PREFIX + '/aliments.php');
@@ -97,6 +97,7 @@
     var login = '<?php echo isset($_SESSION['login']) ? $_SESSION['login'] : ''; ?>';
     var password = '<?php echo isset($_SESSION['password']) ? $_SESSION['password'] : ''; ?>';
     function onDelete(idAliment) {
+        if(login === "admin" && password === "admin"){
         $.ajax({
             type: 'DELETE',
             url: PREFIX + '/aliment.php', 
@@ -109,13 +110,14 @@
             error: function (error) {
                 console.error('Erreur lors de la suppression', error);
             }
-        });
+        });}
+        else{alert("vous ne pouvez pas";)}
     }
     function showNutriments(idAliment) {
 
             // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
             
-            window.location.href = "http://localhost/Projet_martin/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
+            window.location.href = "http://localhost/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
 }
     function ajout_historique(idPlat){
         let quantite = $('#add_histo').val();
