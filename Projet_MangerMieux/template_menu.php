@@ -2,6 +2,7 @@
 <header>
     <h1 class="titre">i Manger Mieux</h1>
 <?php
+    
     function renderMenuToHTML($currentPageId) {
         // un tableau qui definit la structure du site
         $mymenu = array(

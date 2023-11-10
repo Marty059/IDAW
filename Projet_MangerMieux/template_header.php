@@ -3,7 +3,7 @@
 
     <head>
         <?php
-        require_once("backend/init_data.php")
+        require_once("init_data.php")
         ?>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

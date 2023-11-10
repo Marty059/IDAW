@@ -26,11 +26,10 @@ switch($_SERVER["REQUEST_METHOD"]){
         $id_user = id_user($pdo,$data_array);
         $id_plat = $data_array["id_plat"];
         $id_historique = get_last_id_histo($pdo)+1;
-        echo  $id_historique ;
         $date = date('Y-m-d H:i:s');
         $quantite = $data_array["quantite"];
         if ($data_array !== null && isset($data_array["id_plat"])){
-            $request = $pdo->prepare("INSERT INTO HISTORIQUE (ID_HISTORIQUE,ID_USER,ID_PLAT,DATE,Quantité) VALUES (:id_histo,:idUser,:idPlat,:date,:quantite)");
+            $request = $pdo->prepare("INSERT INTO HISTORIQUE (ID_HISTORIQUE,ID_USER,ID_PLAT,DATE,Quantite) VALUES (:id_histo,:idUser,:idPlat,:date,:quantite)");
             $request->bindParam(':idUser', $id_user, PDO::PARAM_INT);
             $request->bindParam(':idPlat', $id_plat, PDO::PARAM_INT);
             $request->bindParam(':date', $date, PDO::PARAM_STR);
