@@ -24,14 +24,15 @@
                         dataSrc: ''
                     },
                     columns: [
-                        { data: 'ID_PLAT' },
+                        { data: 'ID_HISTORIQUE' },
                         { data: 'NOM_PLAT' },
                         { data: 'DATE'},
+                        { data: 'QUANTITE'},
                         {
 
                             data: null,
                                 render: function (data, type, row) {
-                                    return '<form class="delete-form" onsubmit="onDelete(' + row.ID_PLAT + '); return false;">' +
+                                    return '<form class="delete-form" onsubmit="onDelete(' + row.ID_HISTORIQUE + '); return false;">' +
                                         '<div class="col-sm-2">' +
                                             '<input type="submit" class="btn-delete" value="Supprimer">' +
                                         '</div>' +
@@ -51,17 +52,18 @@
             <th>id</th>
             <th>nom plat</th>
             <th>date</th>
+            <th>Quantité</th>
             <th>Supprimer</th>
         </tr>
     </thead>
 
 </table>
 <script>
-    function onDelete(idPlat) {
+    function onDelete(idHistorique) {
         $.ajax({
             type: 'DELETE',
-            url: PREFIX + '/aliment.php', 
-            data: JSON.stringify({ id: idPlat}),
+            url: PREFIX + '/historique.php', 
+            data: JSON.stringify({ login: login, password: password,id: idHistorique}),
             contentType: 'application/json',
             success: function (response) {
                 // Mettez à jour votre tableau après la suppression
