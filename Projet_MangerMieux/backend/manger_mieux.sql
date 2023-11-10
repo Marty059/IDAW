@@ -202,7 +202,7 @@ INSERT INTO `nutriments` (`ID_NUTRIMENT`, `NOM_NUTRIMENT`) VALUES
 (4, 'fibre'),
 (7, 'fer'),
 (10, 'potassium'),
-(1, 'proteinss'),
+(1, 'proteins'),
 (2, 'sucres'),
 (8, 'vitamine-a'),
 (5, 'vitamine-c'),
