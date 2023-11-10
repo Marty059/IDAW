@@ -9,7 +9,6 @@ function id_user($pdo, $data) {
     $request->bindParam(':password', $password, PDO::PARAM_STR);
     $request->execute();
     $id = $request->fetchColumn();
-    echo $id;
     return $id;
 }
 

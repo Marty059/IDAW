@@ -115,7 +115,7 @@
 
             // Afficher les nutriments comme vous le souhaitez (par exemple, dans une boîte de dialogue)
             
-            window.location.href = "http://localhost/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
+            window.location.href = "http://localhost/Projet_martin/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
 }
     function ajout_historique(idPlat){
         let quantite = $('#add_histo').val();
