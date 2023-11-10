@@ -51,6 +51,16 @@
                                         '</div>' +
                                     '</form>';
                             }
+                        },
+                        {
+                            data: null,
+                            render: function (data, type, row) {
+                                return '<form class="modify-form" onsubmit="modify(' + row.ID_ALIMENT + '); return false;">' +
+                                        '<div class="col-sm-2">' + '<input type="text" id="modify_type">'+'<input type="text" id="modify_name">'+
+                                            '<input type="submit" class="btn-modify" value="add">' +
+                                        '</div>' +
+                                    '</form>';
+                            }
                         }
                     ]
             });
@@ -78,6 +88,7 @@
             <th>Bouton</th>
             <th>Voir nutriments</th>
             <th>Ajouter à l'historique (entrez la quantité)</th>
+            <th>Mofifier</th>
         </tr>
     </thead>
 
@@ -140,6 +151,30 @@
                 console.log("AJAX error in request: " + JSON.stringify(error, null, 2));
             }
         });
+    }
+    function modify(idAliment){
+        let id_type = $('#modify_type').val();
+        let nom_aliment = $('#modify_name').val();
+        if(login === "admin" && password === "admin"){
+        $.ajax({
+            type: 'PUT',
+            url: PREFIX + '/aliment.php', 
+            data: JSON.stringify({ id_aliment: idAliment, id_type: id_type, nom_aliment
+            }),
+            contentType: 'application/json',
+            success: function (response) {
+                // Mettez à jour votre tableau après la suppression
+                $('#myTable').DataTable().ajax.reload();
+            },
+            error: function (error) {
+                console.error('Erreur lors de la suppression', error);
+            }
+        });
+    }
+        else{
+            console.log("ici");
+            alert("vous ne pouvez pas");
+        }
     }
 </script>
 </body>
