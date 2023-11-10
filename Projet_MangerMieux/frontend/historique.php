@@ -12,10 +12,10 @@
             var login = '<?php echo isset($_SESSION['login']) ? $_SESSION['login'] : ''; ?>';
             var password = '<?php echo isset($_SESSION['password']) ? $_SESSION['password'] : ''; ?>';
 
-            console.log(PREFIX + '/historique-bis.php');
+            console.log(PREFIX + '/afficher_historique.php');
             $('#myTable').DataTable({
                     ajax: {
-                        url: PREFIX + '/historique-bis.php',
+                        url: PREFIX + '/afficher_historique.php',
                         type: "POST",
                         contentType: 'application/json',
                         data: function(d){
