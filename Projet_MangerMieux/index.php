@@ -36,7 +36,3 @@
         
     ?>    
 </section>
-
-<div id="deconnection">
-		<a class="logout-link" href="index.php?disconnect">Logout</a>
-</div>

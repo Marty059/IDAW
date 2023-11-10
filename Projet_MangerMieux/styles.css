@@ -1,5 +1,5 @@
 /*CSS Titre site*/
-.titre_site{
+.titre_site, .titre_site_inscription{
     color: #333;
     font-family: 'Arial', sans-serif;
     font-size: 2em;
@@ -11,6 +11,26 @@
     padding-bottom: 5px; 
 }
 
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* CSS pour le lien de déconnexion */
+#deconnection {
+    margin: 20px; 
+    text-align: right;
+}
+
+.logout-link {
+    color: black !important;
+    font-weight: bold;
+    text-decoration: none; 
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 /*CSS Menu Navigation*/
 body {
     background-color: #f4f4f4;
@@ -20,7 +40,7 @@ body {
 }
 .menu_principal {
     margin-top: 20px;
-    background-color:#1ba539;
+    background-color:#4caf50;
     display: flex;
     gap:75px;
     justify-content: center;
@@ -70,7 +90,7 @@ h1{
 
 
 /*CSS Inscription*/
-.body_inscription {
+/*.body_inscription {
       font-family: 'Arial', sans-serif;
       background-color: #f4f4f4;
       margin: 0;
@@ -90,7 +110,7 @@ h1{
     width: 100%;
 }
 
-label {
+.l_inscription {
     display: block;
     margin-bottom: 8px;
 }
@@ -109,7 +129,6 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     padding-right: 30px;
-    /* background-image: url('dropdown-arrow.png'); /* Ajoutez une image de flèche personnalisée */
     background-position: right center;
     background-repeat: no-repeat;
 }
@@ -122,7 +141,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #45a049;
-}
+}*/
 
 .logout-link {
     color: #0000FF; 
@@ -208,4 +227,66 @@ input[type="submit"]:hover {
     font-family: Arial, sans-serif;
     float: right;
 }
+
+/*Inscription et login*/
+.body_inscription {
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+  #inscriptionForm, #loginForm {
+    background-color: #fff;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    flex-direction:column;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px; /* Ajout de marges de chaque côté du formulaire */
+    max-width: 400px; /* Limiter la largeur du formulaire */
+    width: 100%;
+    margin: auto;
+  }
+
+  .titre_inscription {
+    text-align: center;
+    color: #333;
+  }
+
+  .l_inscription {
+    display: block;
+    margin: 10px 0 5px;
+    color: #555;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  select {
+    appearance: none;
+  }
+
+  .submit_inscription {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .submit_inscription:hover {
+    background-color: #45a049;
+  }
+
 

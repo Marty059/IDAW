@@ -1,6 +1,12 @@
+
+
 <body class="body_inscription">
+<header>
+    <h1 class="titre_site_inscription">Manger Mieux</h1>
+</header>
+
 <form id="inscriptionForm" action="" method="post">
-    <h2>Inscription au Tracker Alimentaire</h2>
+    <h2 class="titre_inscription">Inscription au Tracker Alimentaire</h2>
 
     <label class="l_inscription" for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" required>
@@ -38,7 +44,7 @@
       <option value="eleve">Élevé</option>
     </select>
 
-    <input type="submit" value="S'inscrire">
+    <input class="submit_inscription" type="submit" value="S'inscrire">
 </body>
 
   <script>
@@ -95,7 +101,7 @@
         });
     });
   </script>
-</body>
+
 
 
 </html>
