@@ -43,9 +43,9 @@
                         {
                             data: null,
                             render: function (data, type, row) {
-                                return '<form class="nutriment-form" onsubmit="ajout_historique(' + row.ID_ALIMENT + '); return false;">' +
-                                        '<div class="col-sm-2">' + '<input type="text" id="add_histo">'+
-                                            '<input type="submit" class="btn-nutriment" value="add">' +
+                                return '<form class="nutriment-form" onsubmit="ajout_historique(event, ' + row.ID_ALIMENT + '); return false;">' +
+                                        '<div class="col-sm-2">' + '<input type="text" class="add_histo">'+
+                                            '<input type="submit" class="btn-histo" value="add">' +
                                         '</div>' +
                                     '</form>';
                             }
@@ -117,21 +117,24 @@
             
             window.location.href = "http://localhost/IDAW/Projet_MangerMieux/index.php?page=show_nutriment&id_nutr="+idAliment;
 }
-    function ajout_historique(idPlat){
-        let quantite = $('#add_histo').val();
-        $.ajax({
-            type: 'POST',
-            url: PREFIX + '/historique.php', 
-            data: JSON.stringify({ id_plat: idPlat,quantite : quantite, login : login, password: password  }),
-            contentType: 'application/json',
-            success: function (response) {
-                // Mettez à jour votre tableau après la suppression
-                $('#myTable').DataTable().ajax.reload();
-            },
-            error: function (error) {
-                console.error('Erreur lors de la suppression', error);}
-        })
-    }
+function ajout_historique(event, idPlat) {
+    // Utilisez le gestionnaire d'événements jQuery pour obtenir la cible du formulaire
+    let quantite = $(event.target).find('.add_histo').val();
+    console.log(quantite);
+    $.ajax({
+        type: 'POST',
+        url: PREFIX + '/historique.php',
+        data: JSON.stringify({ id_plat: idPlat, quantite: quantite, login: login, password: password }),
+        contentType: 'application/json',
+        success: function (response) {
+            // Mettez à jour votre tableau après l'ajout
+            $('#myTable').DataTable().ajax.reload();
+        },
+        error: function (error) {
+            console.error('Erreur lors de l\'ajout dans l\'historique', error);
+        }
+    });
+}
     function ajout_food(){
         let code_ = $('#add_food').val();
         $.ajax({
@@ -153,7 +156,7 @@
         });
     }
     function modify(idAliment){
-        let id_type = $('#modify_type').val();
+        let id_type = $('modify_type').val();
         let nom_aliment = $('#modify_name').val();
         if(login === "admin" && password === "admin"){
         $.ajax({
