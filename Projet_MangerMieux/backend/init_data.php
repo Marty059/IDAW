@@ -11,7 +11,7 @@ function nombre_table($pdo){
 }
 $nb_table = nombre_table($pdo);
 if($nb_table==0){
-    $sqlFile = 'manger_mieux.sql';
+    $sqlFile = 'backend/manger_mieux.sql';
     $sql = file_get_contents($sqlFile);
     $pdo->exec($sql);
 }
